@@ -322,6 +322,9 @@ a {
   text-align: center;
   vertical-align: middle;
 }
+.btn:focus {
+  box-shadow: none !important;
+}
 .btn a {
   text-decoration: none;
   color: inherit !important;
@@ -610,10 +613,12 @@ a {
 }
 .headerMain__menu__bar__inner::before {
   top: -7px;
+  transition: top 0.3s 0.17s;
 }
 .headerMain__menu__bar__inner::after {
   bottom: -7px;
   right: 30%;
+  transition: bottom 0.3s 0.17s;
 }
 .headerMain__menu__bar.active {
   display: block;
