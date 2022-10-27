@@ -683,7 +683,6 @@ a {
   height: 64%;
   position: absolute;
   top: 50%;
-  border: 1px solid #fff;
   left: -5%;
   right: -5%;
   border-radius: 50%;
@@ -694,11 +693,17 @@ a {
 .planetoid__orbita-1 .planetoid__pill {
   transform: rotate(-20deg);
 }
+.planetoid__orbita-1 svg {
+  transform: rotate(-17deg) translate(30px, -34px);
+}
 .planetoid__orbita-2 {
   transform: translateY(-50%) rotate(-30deg);
 }
 .planetoid__orbita-2 .planetoid__pill {
   transform: rotate(30deg);
+}
+.planetoid__orbita-2 svg {
+  transform: rotate(17deg) translate(55px, -32px);
 }
 .planetoid__pill {
   background-color: rgba(0, 0, 0, 0.8);
@@ -716,6 +721,11 @@ a {
   padding-right: 15px;
   white-space: nowrap;
   display: none;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.planetoid__pill.showup {
+  opacity: 1;
 }
 .planetoid__pill-1 {
   display: flex;
@@ -862,17 +872,29 @@ a {
 }
 
 .logos {
-  margin-left: -15px;
-  overflow: hidden;
   margin-top: 40px;
   margin-bottom: 85px;
 }
 .logos__line {
-  display: flex;
+  /* display: flex;
   gap: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 15px; */
+  position: relative;
+  height: 65px;
+  overflow: hidden;
+  margin: auto;
+}
+.logos__line[data-direction="1"] {
+  margin-left: 0;
+  transition: margin-left 3s;
+}
+.logos__line[data-direction="-1"] {
+  margin-left: 0;
+  transition: margin-left 3s;
 }
 .logos__line__item {
+  left: -205px;
+  position: absolute;
   height: 65px;
   width: 205px;
   min-width: 205px;
@@ -890,6 +912,20 @@ a {
 }
 .logos__line__item:hover img {
   filter: none;
+}
+.logos__line__2 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.logos__line__2[data-direction="-1"] .logos__line__item {
+  left: auto;
+  right: -205px;
+}
+.logos:not(.active) .logos__line[data-direction="1"] {
+  margin-left: -100vw;
+}
+.logos:not(.active) .logos__line[data-direction="-1"] {
+  margin-left: 100vw;
 }
 
 .bubbles {
@@ -986,9 +1022,40 @@ a {
   margin-top: 40px;
 }
 
+.cards-slickWrapperForAnimate {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 0;
+  transition: padding-left 1s;
+}
+.cards-slickWrapperForAnimate .cards-slick {
+  transition: height 1s;
+  overflow: hidden;
+}
+.cards-slickWrapperForAnimate .slick-arrow .slick-arrow-inner {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.5s linear, transform 0.4s cubic-bezier(0.17, 0.67, 0.48, 1.74);
+}
+.cards-slickWrapperForAnimate.waitToAnimate {
+  padding-left: 100vw;
+}
+.cards-slickWrapperForAnimate.waitToAnimate .cards-slick {
+  height: 0 !important;
+}
+.cards-slickWrapperForAnimate.animationDone .cards-slick {
+  overflow: unset;
+}
+.cards-slickWrapperForAnimate.animationDone .slick-arrow .slick-arrow-inner {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .cards-slick .cardBlog {
   min-width: 230px;
   width: 230px;
+  margin-bottom: -0.03em;
 }
 .cards-slick .cardCalendar {
   width: 230px;
