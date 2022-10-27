@@ -382,7 +382,7 @@ function orbitaPills() {
 			arrayPills = [],
 			orbita_num = pills[0].getAttribute("data-orbita"),
 			isFirstTimeAddEvent = true;
-
+		var gsapPillsArray = [];
 
 		const orbitaTween = gsap.to(orbita, {
 			duration: orbitTime,
@@ -402,7 +402,7 @@ function orbitaPills() {
 
 							orbitStartTime = orbitTiming * i;
 
-							gsap.to(pill, {
+							gsapPillsArray[i] = gsap.to(pill, {
 								duration: orbitTime, 
 								repeat: -1,
 								ease: "linear",
@@ -432,16 +432,28 @@ function orbitaPills() {
 			    }
 			}
 		});
-
 		if(isFirstTimeAddEvent) {
 			isFirstTimeAddEvent = false;
 
 			document.querySelector(".planetoid__orbita-"+orbita_num).addEventListener("mouseenter", function () {
-			  gsap.to(orbitaTween, { timeScale: 0.3});
+				// console.log(gsapPillsArray.length, " ; ", pillsQ);
+				// console.log("mouseenter: ", event);
+				// console.log("mouseenter: ", event.target);
+				console.log(event.target.querySelector("#orbita_"+orbita_num));
+				// console.log(gsapPillsArray[0]);
+				event.target.querySelector("#orbita_"+orbita_num).style.stroke = "#fe05f2";
+				gsapPillsArray.forEach((pillTween) => {
+					gsap.to(pillTween, { timeScale: 0.1})
+				});
+			  // gsap.to(orbitaTween, { timeScale: 0.3});
 			});
 
 			document.querySelector(".planetoid__orbita-"+orbita_num).addEventListener("mouseleave", function () {
-			  gsap.to(orbitaTween, { timeScale: 1});
+				event.target.querySelector("#orbita_"+orbita_num).style.stroke = "#fff";
+				gsapPillsArray.forEach((pillTween) => {
+					gsap.to(pillTween, { timeScale: 1})
+				});
+			  // gsap.to(orbitaTween, { timeScale: 1});
 			});		
 		}
 	}
