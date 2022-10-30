@@ -5,6 +5,7 @@ window.addEventListener("load", WindowLoad, false);
 
 function DomLoaded() {
 	initSlick.check();
+	tabListFilter.onload();
 }
 function WindowLoad() {
 	var partnersList;
@@ -22,15 +23,16 @@ function WindowLoad() {
 
 	logosRunningLines();
 	orbitaPills();
+	teamOnMain();
 }
 function eventDocClick(e) {
     var targ = e.target;
     var clickedEl = e.target;
 
     while (targ && targ != this) {
-    	if (targ.classList.contains("headerMain__menu__bar")) {
+    	if(targ.classList.contains("headerMain__menu__bar")) {
     		targ.classList.toggle("active");
-    		var menu;
+    		let menu;
     		if(targ.classList.contains("active")) {    			
 	    		if(menu = document.querySelector(".headerMain__menu")) {
 	    			menu.classList.add("active");
@@ -42,6 +44,20 @@ function eventDocClick(e) {
 	    			menu.classList.remove("active");
 	    			document.body.classList.remove("headerMainMenuActive");
 	    		}	
+    		}
+    		break;
+    	}
+    	if(targ.classList.contains("tablist-filter")) {
+    		let tabClicked = undefined;
+    		if(clickedEl.getAttribute("data-filterby")) {
+    			tabClicked = clickedEl;
+    		}
+    		else if(clickedEl.parentNode.getAttribute("data-filterby")) {
+    			tabClicked = clickedEl.parentNode;
+    		}
+    		if(tabClicked) {
+    			tabListFilter.init(tabClicked, targ);
+    			break;
     		}
     		break;
     	}
@@ -75,7 +91,74 @@ var loadJS = function(url, callback, locToInsert){
 	offset: 100,
 	duration: 3000,
 });*/
-
+var tabListFilter = {
+	init: function(tab, tabList) {
+		this.setTabActive(tab, tabList);
+		this.doFilter(tab, tabList.getAttribute("data-target"), true);
+	},
+	onload: function() {
+		var tabList,
+		 	targetContentCls,
+		 	tabActive;
+		if(tabList = document.querySelector(".tablist-filter")) {
+			if(targetContentCls = tabList.getAttribute("data-target")) {
+				if(document.querySelector("."+targetContentCls)) {
+					if(tabActive = tabList.querySelector(".active")) {
+						this.doFilter(tabActive, targetContentCls);						
+					}
+				}
+			}
+		}
+	},
+	setTabActive: function(tab, tabList) {
+		var prevActive;
+		prevActive = tabList.querySelector(".active");
+		prevActive.setAttribute("aria-selected", "false");
+		prevActive.classList.remove("active");
+		tab.classList.add("active");
+		tab.setAttribute("aria-selected", "true");
+	},
+	doFilter: function(tab, targetContentCls, animation) {
+		var contentWrapper;
+		if(targetContentCls && (contentWrapper = document.querySelector("."+targetContentCls))) {
+			var filterCriterion = tab.getAttribute("data-filterby");
+			var items = contentWrapper.querySelectorAll("[data-filter]");
+			for(let i = 0; i < items.length; i++) {
+				if(filterCriterion == "all") {
+					if(animation) {
+						gsap.set(items[i], {opacity:0})
+							.then(() => {items[i].classList.remove("hidden")});
+						gsap.to(items[i], {opacity:1, duration:1});
+					}
+					else {
+						items[i].classList.remove("hidden");						
+					}
+				}
+				else {
+					if(items[i].getAttribute("data-filter") == filterCriterion) {
+						if(animation) {
+							gsap.set(items[i], {opacity:0})
+								.then(() => {items[i].classList.remove("hidden")});
+							gsap.to(items[i], {opacity:1, duration:1});
+						}
+						else {
+							items[i].classList.remove("hidden");							
+						}
+					}
+					// hide no filterCriterion
+					else {
+						if(animation) {
+							items[i].classList.add("hidden");							
+						}
+						else {
+							items[i].classList.add("hidden");							
+						}
+					}					
+				}
+			}
+		}
+	}
+}	
 var initSlick = {
 	check: function() {
 		var isCardsSlick = document.getElementsByClassName("cards-slick")[0] ? 1 : 0;
@@ -307,7 +390,7 @@ function logosRunningLines() {
 		var lines = logosWrapper.querySelectorAll(".logos__line");
 		if(lines.length) {
 			lines.forEach((line) => {
-				line.style.width = line.parentNode.clientWidth + "px";
+				line.style.width = line.parentNode.clientWidth + 30 + "px";
 				initGsap(line, line.getAttribute("data-direction"), line.querySelectorAll(".logos__line__item").length, line.getAttribute("data-speed"));
 			});
 		}
@@ -352,7 +435,7 @@ function logosRunningLines() {
 		});
 
 		document.querySelector(lineClsStr).addEventListener("mouseenter", function () {
-		  gsap.to(gsapTween, { timeScale: 0.3});
+		  gsap.to(gsapTween, { timeScale: 0.1});
 		});
 
 		document.querySelector(lineClsStr).addEventListener("mouseleave", function () {
@@ -377,14 +460,18 @@ function orbitaPills() {
 		var orbitTime = 20,
 			orbitPills = pillsQ,
 			orbitTiming = orbitTime / pillsQ,
+			pillsLive = planetoidWrapper.getElementsByClassName("planetoid__pill"),
 			pills = orbita.querySelectorAll(".planetoid__pill"),
 			isFirstInit = true,
-			arrayPills = [],
 			orbita_num = pills[0].getAttribute("data-orbita"),
-			isFirstTimeAddEvent = true;
-		var gsapPillsArray = [];
+			isFirstTimeAddEvent = true,
+			isAllowedAddEvent = false,
+			gsapPillsArray = [],
+			antiLooping = 600; // антизацикливание при проверке пилсов на координаты
 
-		const orbitaTween = gsap.to(orbita, {
+	    	var intervalId = 0;
+
+		const orbitaTween = gsap.to(orbita, {			
 			duration: orbitTime,
 			ease: "linear",
 			scrollTrigger: {
@@ -393,6 +480,13 @@ function orbitaPills() {
 			    end: "bottom 50px",
 			    markers: false,
 			    onEnter: () => {
+
+			    	// проверка, чтобы все пилсы получили координаты
+			    	// и затем привызываю события 
+			    	if(!isAllowedAddEvent) {			    		
+				    	intervalId = setTimeout(checkPillsForShowUp, 200);			    	
+			    	}
+			    	
 			    	if(isFirstInit) {
 			    		isFirstInit = false;
 
@@ -414,99 +508,295 @@ function orbitaPills() {
 								}
 							},orbitStartTime);
 
-							arrayPills.push(pill);
-							pill.classList.add("showup");
 						}); // /forEach
-
 			    	}
-			    	// document.querySelector(".logos").classList.add("active");			    	
 			    },
 			    onLeave: () => {
-			    	orbitaTween.pause();
+			    	// orbitaTween.pause();
+			    	if(isAllowedAddEvent) {			    		
+				    	gsapPillsArray.forEach((pillTween) => {
+							pillTween.pause();
+						});
+			    	}
 			    },
 			    onEnterBack: () => {
-			    	orbitaTween.resume();
+			    	// orbitaTween.resume();
+			    	if(isAllowedAddEvent) {			    		
+				    	gsapPillsArray.forEach((pillTween) => {
+							pillTween.resume();
+						});
+			    	}
 			    },
 			    onLeaveBack: () => {
-			    	orbitaTween.pause();
+			    	// orbitaTween.pause();
+			    	if(isAllowedAddEvent) {
+				    	gsapPillsArray.forEach((pillTween) => {
+							pillTween.resume();
+						});
+			    	}
 			    }
 			}
 		});
-		if(isFirstTimeAddEvent) {
-			isFirstTimeAddEvent = false;
 
-			document.querySelector(".planetoid__orbita-"+orbita_num).addEventListener("mouseenter", function () {
-				// console.log(gsapPillsArray.length, " ; ", pillsQ);
-				// console.log("mouseenter: ", event);
-				// console.log("mouseenter: ", event.target);
-				console.log(event.target.querySelector("#orbita_"+orbita_num));
-				// console.log(gsapPillsArray[0]);
-				event.target.querySelector("#orbita_"+orbita_num).style.stroke = "#fe05f2";
-				gsapPillsArray.forEach((pillTween) => {
-					gsap.to(pillTween, { timeScale: 0.1})
-				});
-			  // gsap.to(orbitaTween, { timeScale: 0.3});
-			});
+    	function checkPillsForShowUp() {
+			for(let j = 0; j <= pillsLive.length-1; j++) {
+	    		(function(jj) {
+	    			if(!pillsLive[jj].getAttribute("style")) {
+	    				antiLooping--;
+	    				clearTimeout(intervalId);
+	    				if(antiLooping > 0) {				    					
+		    				intervalId = setTimeout(checkPillsForShowUp, 200);				    				
+	    				}
+	    			}
+	    			else {
+	    				pillsLive[jj].classList.add("showup");
+	    				if(jj >= pillsLive.length-1) {				    					
+		    				clearTimeout(intervalId);
+		    				isAllowedAddEvent = true;
+		    				addEvents();
+	    				}
+	    			}
+	    		})(j);
+	    	}
+		}			    		    	
 
-			document.querySelector(".planetoid__orbita-"+orbita_num).addEventListener("mouseleave", function () {
-				event.target.querySelector("#orbita_"+orbita_num).style.stroke = "#fff";
-				gsapPillsArray.forEach((pillTween) => {
-					gsap.to(pillTween, { timeScale: 1})
+		function addEvents() {			
+			if(isFirstTimeAddEvent && isAllowedAddEvent) {
+				isFirstTimeAddEvent = false;
+
+				document.querySelector(".planetoid__orbita-"+orbita_num).addEventListener("mouseenter", function () {
+					event.target.querySelector("#orbita_"+orbita_num).style.stroke = "#fe05f2";
+					gsapPillsArray.forEach((pillTween) => {
+						gsap.to(pillTween, { timeScale: 0.1})
+					});
 				});
-			  // gsap.to(orbitaTween, { timeScale: 1});
-			});		
-		}
+
+				document.querySelector(".planetoid__orbita-"+orbita_num).addEventListener("mouseleave", function () {
+					event.target.querySelector("#orbita_"+orbita_num).style.stroke = "#fff";
+					gsapPillsArray.forEach((pillTween) => {
+						gsap.to(pillTween, { timeScale: 1})
+					});
+				});		
+			}
+		}		
 	}
 }
-/*
-(function() {
-	var orbitTime = 20,
-		orbitPills = 5,
-		orbitTiming = orbitTime / orbitPills,
-		pills = document.querySelectorAll(".planetoid .planetoid__pill");
 
-	// var tl = gsap.timeline({repeat: -1,   defaults: { duration: orbitTime, ease: "none" }});
-	var globCountPills = 0;
-	var arrayPills = [];
+function teamOnMain() {
+	var teamWrapper;
+	if(teamWrapper = document.querySelector(".team__onMain")) {
+		var persons = teamWrapper.querySelectorAll(".team__person:not(.team__person_bigSize)");
 
-	pills.forEach((pill, i) => {
-		var orbitStartTime,
-			orbita_num = pill.getAttribute("data-orbita");
+		if(persons.length) {
 
-		globCountPills = i;
-		if(globCountPills >= 4) {
-			i = i - 5;
+			var personsQ = 30,
+				isFirstShow = true,
+				isPersonHovered = false,
+				rotateIntervalId = 0,
+				checkDateIntervalId = 0,
+				activePositionsArr = [],
+				activePersonsArr = [],
+				antiLooping = 0;
+
+
+			ScrollTrigger.create({
+				trigger: teamWrapper,
+				start: "top 90%",
+				end: "bottom 50px",
+				onToggle: self => {
+					if(self.isActive) {						
+						console.log("toggled, isActive:", self.isActive);
+						antiLooping = 0;
+						teamRotation();
+						checkDatePersons();
+					}
+					else {
+						console.log("toggled, isActive:", self.isActive);
+						antiLooping = 31;
+						clearInterval(checkDateIntervalId);
+						clearTimeout(rotateIntervalId);
+					}
+				},
+			});
+
+
+			const tl = gsap.timeline({
+			  scrollTrigger: {
+			    trigger: ".team__onMain",
+			    start: "top top",
+			    end: "bottom 100%",
+			    scrub: 2
+			  }
+			});
+
+			gsap.utils.toArray(".team__person").forEach(layer => {
+			  const depth = layer.dataset.depth;
+			  const movement = -(layer.offsetHeight * depth)
+			  tl.to(layer, {y: movement, ease: "none"}, 0)
+			});
 		}
+	}
 
-		orbitStartTime = orbitTiming * i;
 
 
-		gsap.to(pill, {
-			duration: orbitTime, 
-			repeat: -1,
-			ease: "linear",
-			motionPath:{
-				path: "#orbita_"+orbita_num,
-				align: "#orbita_"+orbita_num,
-				autoRotate: false,
-				alignOrigin: [0.5, 0.5],
+	function teamRotation(delay) {
+		var _delay = delay ? delay : 500;
+
+		if(antiLooping > 30) return;
+
+		clearInterval(rotateIntervalId);
+		activePositionsArr.length = 0;
+		activePersonsArr.length = 0;
+		if(!isPersonHovered) {
+			collectActivePersonsStata();
+			IMGrndPersonNumber = getRand(3,personsQ);
+			POSrndPersonNumber = getRand(3,11);
+
+			// console.log("###############################");
+			// console.log("activePositionsArr: ", activePositionsArr);
+			// console.log("activePersonsArr: ", activePersonsArr);
+			// console.log("POSrndPersonNumber = ", POSrndPersonNumber);
+			// console.log("IMGrndPersonNumber = ", IMGrndPersonNumber);
+
+			antiLooping++;
+
+			if(
+				(!activePositionsArr.includes("p"+POSrndPersonNumber))
+				&&
+				(!activePersonsArr.includes(IMGrndPersonNumber+""))
+				) {
+				// console.log("1 POSrndPersonNumber = ", POSrndPersonNumber);
+				// console.log("1 IMGrndPersonNumber = ", IMGrndPersonNumber);
+
+				if(true || !activePersonsArr.includes(IMGrndPersonNumber+"")) {
+					// console.log("2 POSrndPersonNumber = ", POSrndPersonNumber);
+					// console.log("2 IMGrndPersonNumber = ", IMGrndPersonNumber);
+
+					var personAboutToShow;
+					const start = Date.now();
+
+					rotateIntervalId = setTimeout(function() {
+						antiLooping = 0;
+						personAboutToShow = teamWrapper.querySelector(".team__person[data-person='p"+POSrndPersonNumber+"']");
+						if(personAboutToShow) {
+
+							clearPerson(personAboutToShow);
+
+							var imgTpl = '<img data-img="${NUM}" src="i/team/numbering/person_${NUM}.png" srcset="i/team/numbering/person_${NUM}.png 1x, i/team/numbering/person_${NUM}@2x.png 1.5x" />';
+							var imgNew = imgTpl.replace(/\$\{NUM\}/g, IMGrndPersonNumber);
+
+							personAboutToShow.querySelector(".team__person__imgWrap").innerHTML = "";
+							personAboutToShow.querySelector(".team__person__imgWrap").insertAdjacentHTML("afterBegin", imgNew);
+							personAboutToShow.setAttribute("data-start", start);
+
+							activePositionsArr.length = 0;
+							activePersonsArr.length = 0;
+							gsap.to(personAboutToShow, {duration:0.5})
+							.then(() => {
+								personAboutToShow.classList.remove("hovered");
+								personAboutToShow.classList.add("active");
+								personAboutToShow.setAttribute("data-depth", 0.6);
+								personAboutToShow.classList.remove("blured");
+							});
+							cleanOldTimePersons();
+							// teamRotation();
+						}
+					}, _delay);
+				}
+				else {
+					// activePositionsArr.length = 0;
+					// activePersonsArr.length = 0;
+					// clearInterval(rotateIntervalId);
+					// teamRotation();	
+				}
 			}
-		},orbitStartTime);
-
-		arrayPills.push(pill);
-
-
-	}); // /forEach
-		
-
-		for(let i = 0; i < arrayPills.length; i++ ) {
-			let timing = 4000;
-			(function (i, t) {
-				setTimeout(function() {					
-					arrayPills[i].classList.add("showup");
-				}, t*i);
-			})(i, timing);
+			else {
+				activePositionsArr.length = 0;
+				activePersonsArr.length = 0;
+				clearInterval(rotateIntervalId);
+				// teamRotation();
+			}
 		}
 
-})();
-*/
+	};
+
+	function collectActivePersonsStata() {
+		var activePersons = teamWrapper.querySelectorAll(".team__person.active");
+		activePersons.forEach((person) => {
+			activePositionsArr.push(person.getAttribute("data-person"));
+			activePersonsArr.push(person.getElementsByTagName("img")[0].getAttribute("data-img"));
+		});
+	};
+	function hoverPerson(person) {
+		isPersonHovered = true;
+		clearInterval(checkDateIntervalId);
+		clearTimeout(rotateIntervalId);
+		rndImgNumber = getRand(3,personsQ);
+		blurAll(person);
+		person.classList.add("hovered");
+	};
+	function unHoverPerson(person) {
+		isPersonHovered = false;
+		antiLooping = 0;
+		person.classList.remove("hovered");
+		teamRotation(250);
+		checkDatePersons();
+	};
+	function blurAll(personHovered) {
+		var personsForBlur = teamWrapper.querySelectorAll(".team__person:not(.team__person_bigSize):not([data-person='" + personHovered.getAttribute("data-person") + "'])");
+
+		personsForBlur.forEach((person) => {
+			person.classList.remove("active");
+			person.classList.add("blured");
+			person.classList.remove("hovered");
+			person.setAttribute("data-depth", 0.3);		
+		});
+	};
+	function checkDatePersons() {		
+		checkDateIntervalId = setInterval(function() {
+			cleanOldTimePersons();		
+		}, 700);
+	}
+	function cleanOldTimePersons() {
+		antiLooping = 0;
+		var persons = teamWrapper.querySelectorAll(".team__person.active"),
+			elapsed = 0;
+		persons.forEach((person) => {
+			var start = parseInt(person.getAttribute("data-start"));
+
+			if(start) {				
+				elapsed = (Date.now() - start) / 1000;
+				console.log("elapsed: ", elapsed);
+				if(elapsed > 8) {
+					person.classList.add("blured");
+					person.classList.remove("hovered");
+					person.classList.remove("active");
+					person.setAttribute("data-start", 0);
+					person.setAttribute("data-depth", 0.3);
+				}
+			}
+		});
+		if(elapsed) {
+			teamRotation();
+		}
+	};
+	function clearPerson(p) {
+		p.setAttribute("data-start", 0);
+		p.setAttribute("data-depth", 0.3);
+		p.classList.remove("blured");
+		p.classList.remove("hovered");
+	}
+	function getRand(min,max){
+      return parseInt(Math.random() * (max - min) + min,10);
+    };
+    (function() {
+    	persons.forEach((person) => {
+			person.addEventListener("mouseenter", () => {
+				hoverPerson(person);
+			});
+			person.addEventListener("mouseleave", () => {
+				unHoverPerson(person);
+			});
+		});
+    })();
+}
