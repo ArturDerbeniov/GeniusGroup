@@ -43,28 +43,27 @@
 							Вакансии
 						</div>						
 						<div class="commonPage__intro">Описание</div>
-						<ul role="tablist" class="tab-grouping vacancies__tabGrouping nav">
+						<ul role="tablist" data-target="tab-content1" class="tablist-filter tab-grouping vacancies__tabGrouping nav">
 							<li class="nav-item" role="presentation">
-								<button class="tab nav-link active" data-bs-toggle="tab" data-bs-target="#tabtarget1" type="button" role="tab" aria-controls="" aria-selected="true">Все вакансии</button>
+								<button class="tab nav-link " data-filterby="all" type="button" role="tab" aria-controls="" aria-selected="true">Все вакансии</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<button class="tab nav-link" data-bs-toggle="tab" data-bs-target="#tabtarget2" type="button" role="tab" aria-controls="" aria-selected="false">Категория</button>
+								<button class="tab nav-link active" data-filterby="filter2" type="button" role="tab" aria-controls="" aria-selected="false">Категория</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<button class="tab nav-link" data-bs-toggle="tab" data-bs-target="#tabtarget3" type="button" role="tab" aria-controls="" aria-selected="false">Категория 2</button>
+								<button class="tab nav-link" data-filterby="filter3" type="button" role="tab" aria-controls="" aria-selected="false">Категория 2</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<button class="tab nav-link" data-bs-toggle="tab" data-bs-target="#tabtarget4" type="button" role="tab" aria-controls="" aria-selected="false">Категория 3</button>
+								<button class="tab nav-link" data-filterby="filter4" type="button" role="tab" aria-controls="" aria-selected="false">Категория 3</button>
 							</li>
 							<li class="nav-item" role="presentation">
-								<button class="tab nav-link" data-bs-toggle="tab" data-bs-target="#tabtarget5" type="button" role="tab" aria-controls="" aria-selected="false">Категория 4</button>
+								<button class="tab nav-link" data-filterby="filter5" type="button" role="tab" aria-controls="" aria-selected="false">Категория 4</button>
 							</li>
 						</ul>
 					</section>
-					<section class="commonPage__section tab-content">
-						<div class="tab-pane fade show active" id="tabtarget1" role="tabpanel" aria-labelledby="">
+					<section class="commonPage__section tab-content tab-content1">
 							<div class="row cardCommon__cells gutters-0px">
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -78,7 +77,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -92,7 +91,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -106,7 +105,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -120,7 +119,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -134,7 +133,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -148,7 +147,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -162,7 +161,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -176,7 +175,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter1" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -190,11 +189,8 @@
 										</div>
 									</a>
 								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="tabtarget2" role="tabpanel" aria-labelledby="">
-							<div class="row cardCommon__cells gutters-0px">
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+
+								<div data-filter="filter2" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -208,7 +204,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter2" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -222,7 +218,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter2" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -236,11 +232,9 @@
 										</div>
 									</a>
 								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="tabtarget3" role="tabpanel" aria-labelledby="">
-							<div class="row cardCommon__cells gutters-0px">
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+
+								
+								<div data-filter="filter3" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -254,7 +248,7 @@
 										</div>
 									</a>
 								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter3" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -268,11 +262,22 @@
 										</div>
 									</a>
 								</div>								
-							</div>
-						</div>
-						<div class="tab-pane fade" id="tabtarget4" role="tabpanel" aria-labelledby="">
-							<div class="row cardCommon__cells gutters-0px">
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+								<div data-filter="filter4" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+									<a href="" class="cardVacancy cardCommon">
+										<div class="cardCommon__inner">
+											<div class="cardCommon__cntWrap">
+												<div class="cardCommon__title">
+													Traffic Manager
+												</div>
+												<div class="cardCommon__footer">
+													Категория
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+
+								<div data-filter="filter5" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
 									<a href="" class="cardVacancy cardCommon">
 										<div class="cardCommon__inner">
 											<div class="cardCommon__cntWrap">
@@ -286,122 +291,111 @@
 										</div>
 									</a>
 								</div>													
+								<div data-filter="filter5" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+									<a href="" class="cardVacancy cardCommon">
+										<div class="cardCommon__inner">
+											<div class="cardCommon__cntWrap">
+												<div class="cardCommon__title">
+													Traffic Manager
+												</div>
+												<div class="cardCommon__footer">
+													Категория
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div data-filter="filter5" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+									<a href="" class="cardVacancy cardCommon">
+										<div class="cardCommon__inner">
+											<div class="cardCommon__cntWrap">
+												<div class="cardCommon__title">
+													Traffic Manager
+												</div>
+												<div class="cardCommon__footer">
+													Категория
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div data-filter="filter5" class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
+									<a href="" class="cardVacancy cardCommon">
+										<div class="cardCommon__inner">
+											<div class="cardCommon__cntWrap">
+												<div class="cardCommon__title">
+													Traffic Manager
+												</div>
+												<div class="cardCommon__footer">
+													Категория
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>			
 							</div>
-						</div>
-						<div class="tab-pane fade" id="tabtarget5" role="tabpanel" aria-labelledby="">
-							<div class="row cardCommon__cells gutters-0px">
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
-									<a href="" class="cardVacancy cardCommon">
-										<div class="cardCommon__inner">
-											<div class="cardCommon__cntWrap">
-												<div class="cardCommon__title">
-													Traffic Manager
-												</div>
-												<div class="cardCommon__footer">
-													Категория
-												</div>
-											</div>
-										</div>
-									</a>
-								</div>													
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
-									<a href="" class="cardVacancy cardCommon">
-										<div class="cardCommon__inner">
-											<div class="cardCommon__cntWrap">
-												<div class="cardCommon__title">
-													Traffic Manager
-												</div>
-												<div class="cardCommon__footer">
-													Категория
-												</div>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
-									<a href="" class="cardVacancy cardCommon">
-										<div class="cardCommon__inner">
-											<div class="cardCommon__cntWrap">
-												<div class="cardCommon__title">
-													Traffic Manager
-												</div>
-												<div class="cardCommon__footer">
-													Категория
-												</div>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="col-12 col-sm-6 col-md-4 cardCommon__cells__item">
-									<a href="" class="cardVacancy cardCommon">
-										<div class="cardCommon__inner">
-											<div class="cardCommon__cntWrap">
-												<div class="cardCommon__title">
-													Traffic Manager
-												</div>
-												<div class="cardCommon__footer">
-													Категория
-												</div>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>												
 					</section>
 					<section class="commonPage__section">
 						<div class="row">
-							<div class="col-12 col-sm-6 col-lg-5 col-xl-4 ms-auto">								
+							<div class="col-12 col-sm-4 col-md-6 col-lg-7 col-xl-8 d-flex align-items-center text-center order-1 order-sm-0">
+								<picture class="form__picAside">
+			                        <source media="(min-width: 1200px)" srcset="i/cub_xl.png 1x, i/cub_xl@2x.png 1.5x">
+			                        <source media="(min-width: 768px)" srcset="i/cub_lg@2x.png">
+			                        <source media="(min-width: 320px)" srcset="i/cub_xs@2x.png 1.5x">
+			                        <img class="img-fluid" src="i/cub_xl.png" alt="" />
+			                    </picture>
+							</div>
+							<div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
 								<div class="h5">
 									Расскажите нам о своей задаче и мы свяжемся, чтобы её обсудить 
 								</div>
 								<form>
 									<div class="form-input">
-                                <div class="form-input__inner">
-                                    <input type="text" value=""  class="form-control" placeholder="Ваше имя" />
-                                    <label>Ваше имя</label>
-                                </div>
-                            </div>
-                            <div class="form-input">
-                                <div class="form-input__inner">
-                                    <input type="tel" value="" class="form-control" placeholder="Ваш телефон" />
-                                    <label>Ваш телефон</label>
-                                </div>
-                            </div>
+		                                <div class="form-input__inner">
+		                                    <input type="text" value=""  class="form-control" placeholder="Ваше имя" />
+		                                    <label>Ваше имя</label>
+		                                </div>
+		                            </div>
+		                            <div class="form-input">
+		                                <div class="form-input__inner">
+		                                    <input type="tel" value="" class="form-control" placeholder="Ваш телефон" />
+		                                    <label>Ваш телефон</label>
+		                                </div>
+		                            </div>
 									<div class="form-input">
-	                                <div class="form-input__inner">
-	                                    <input class="form-control" type="email" value="" placeholder="E-mail" />
-	                                    <label>E-mail</label>
-	                                </div>
-	                            </div>
-	                            <div class="form-input">
-	                                <div class="form-input__inner">
-	                                    <textarea class="form-control" name="comment" placeholder="Комментарий"></textarea>
-	                                    <label>Комментарий</label>
-	                                </div>
-	                            </div>
-	                            <div class="form-input__attach">
-	                                <div class="form-input__inner">
-	                                    <input id="attachFile" type="file" />
-	                                    <label for="attachFile">Прикрепить файл </label>
-	                                </div>
-	                            </div>
-	                            <div class="form-check mt-5">
-	                                <div class="form-check__inner ">
-	                                    <input type="checkbox" value="1" name="">
-	                                    <span class="form-check-box"></span>
-	                                    <div class="form-check-content">
-	                                        <span class="form-check-txt">
-	                                            Согласен на <a href="" class="uline">обработку персональных данных</a>
-	                                        </span>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            <button href="" class="btn btn-white mt-5">
-												<div class="btn-inner">
-													<div class="btn-txt">Отправить</div>
-												</div>
-											</button>
+		                                <div class="form-input__inner">
+		                                    <input class="form-control" type="email" value="" placeholder="E-mail" />
+		                                    <label>E-mail</label>
+		                                </div>
+		                            </div>
+		                            <div class="form-input">
+		                                <div class="form-input__inner">
+		                                    <textarea class="form-control" name="comment" placeholder="Комментарий"></textarea>
+		                                    <label>Комментарий</label>
+		                                </div>
+		                            </div>
+		                            <div class="form-input__attach">
+		                                <div class="form-input__inner">
+		                                    <input id="attachFile" type="file" />
+		                                    <label for="attachFile">Прикрепить файл </label>
+		                                </div>
+		                            </div>
+		                            <div class="form-check mt-5">
+		                                <div class="form-check__inner ">
+		                                    <input type="checkbox" value="1" name="">
+		                                    <span class="form-check-box"></span>
+		                                    <div class="form-check-content">
+		                                        <span class="form-check-txt">
+		                                            Согласен на <a href="" class="uline">обработку персональных данных</a>
+		                                        </span>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <button href="" class="btn btn-white mt-5">
+										<div class="btn-inner">
+											<div class="btn-txt">Отправить</div>
+										</div>
+									</button>
 								</form>
 							</div>
 						</div>
@@ -496,6 +490,7 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/MotionPathPlugin.min.js"></script>	
 
     <script difer src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
