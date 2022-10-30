@@ -15,10 +15,8 @@
 .page-index .headerMain__menu__bar__inner::after {
   background-color: #fff;
 }
-.page-index .footerMain .wrapperDefault-inner {
-  margin-top: 80px;
-}
 .page-index .footerMain > .container-fluid {
+  margin-top: 80px;
   background-color: #131314;
 }
 .page-index .footerMain a:hover {
@@ -86,6 +84,9 @@
 }
 .page-index .cardCalendar__cntWrap {
   transition: background-color 0.7s, color 0.3s 0.3s;
+}
+.page-index .plus::before, .page-index .plus::after {
+  background-color: #fff;
 }
 .listWrap__list, .partners__list, .listSquare, .resetList {
   list-style: none;
@@ -188,6 +189,7 @@ h1, .h1, .commonPage__title,
 h2, .h2, .vacancy__page__header__title, .vacancies__page__header__title, .commonPage__section__title:not(h4), .cardCompanyStata .cardCommon__title,
 h3, .h3 h4, .vacancy__section__title h4,
 .h4 h5,
+.section-teamOnMain__title h5,
 .accordion-button h5,
 .blTextImgAside__title h5,
 .cardCalendar__title h5,
@@ -214,7 +216,7 @@ h3, .h3, .vacancy__section__title {
   margin-bottom: 20px;
 }
 
-h4, .h4, .accordion-button, .blTextImgAside__title, .cardCalendar__title, .cardCommon__title {
+h4, .h4, .section-teamOnMain__title, .accordion-button, .blTextImgAside__title, .cardCalendar__title, .cardCommon__title {
   font-size: 22px;
   margin-bottom: 20px;
 }
@@ -231,18 +233,18 @@ h5, .h5 {
   font-weight: 500;
 }
 
-p, .p2, .accordion-body, .vacancy__section__cnt, .article__author__cite, .article__page p, .commonPage__intro, .listWrap__title, .cardCompanyStata .cardCommon__footer, .cardBlog__intro, .cardBlog__title, .partners__list__item__inner, .listSquare__item {
+p, .p2, .section-teamOnMain__intro, .accordion-body, .vacancy__section__cnt, .article__author__cite, .article__page p, .commonPage__intro, .listWrap__title, .cardCompanyStata .cardCommon__footer, .cardBlog__intro, .cardBlog__title, .partners__list__item__inner, .listSquare__item {
   font-size: 16px;
   margin-bottom: 20px;
   line-height: 1.3;
 }
 
-.p3, .form-input__inner label, .team__item__name, .article__author__name, .listWrap__item, .pill, .btn-black_small .btn-txt, .btn .q {
+.p3, .form-input__inner label, .team__person__name, .article__author__name, .listWrap__item, .pill, .btn-black_small .btn-txt, .btn .q {
   font-size: 14px;
   line-height: 1.3;
 }
 
-.t1, .team__item__position, .accordion-button .brief, .blTextImgAside__footer, .article__author__position, .cardCalendar__footer, .cardBlog__footer, .cardCommon__footer, .pill-small {
+.t1, .team__person__position, .accordion-button .brief, .blTextImgAside__footer, .article__author__position, .cardCalendar__footer, .cardBlog__footer, .cardCommon__footer, .pill-small {
   font-size: 12px;
   line-height: 1.2;
 }
@@ -294,9 +296,9 @@ a {
 .theme-light h1, .theme-light .h1, .theme-light .commonPage__title,
 .theme-light h2, .theme-light .h2, .theme-light .vacancy__page__header__title, .theme-light .vacancies__page__header__title, .theme-light .commonPage__section__title:not(h4),
 .theme-light h3, .theme-light .h3, .theme-light .vacancy__section__title,
-.theme-light h4, .theme-light .h4, .theme-light .accordion-button, .theme-light .blTextImgAside__title, .theme-light .cardCalendar__title, .theme-light .cardCommon__title,
+.theme-light h4, .theme-light .h4, .theme-light .section-teamOnMain__title, .theme-light .accordion-button, .theme-light .blTextImgAside__title, .theme-light .cardCalendar__title, .theme-light .cardCommon__title,
 .theme-light h5, .theme-light .h5,
-.theme-light p, .theme-light .p1, .theme-light .blTextImgAside__intro, .theme-light .p2, .theme-light .accordion-body, .theme-light .vacancy__section__cnt, .theme-light .article__author__cite, .theme-light .commonPage__intro, .theme-light .listWrap__title, .theme-light .cardCompanyStata .cardCommon__footer, .cardCompanyStata .theme-light .cardCommon__footer, .theme-light .cardBlog__intro, .theme-light .cardBlog__title, .theme-light .partners__list__item__inner, .theme-light .listSquare__item, .theme-light .p3, .theme-light .form-input__inner label, .form-input__inner .theme-light label, .theme-light .team__item__name, .theme-light .article__author__name, .theme-light .listWrap__item, .theme-light .pill, .theme-light .btn-black_small .btn-txt, .btn-black_small .theme-light .btn-txt, .theme-light .btn .q, .btn .theme-light .q {
+.theme-light p, .theme-light .p1, .theme-light .blTextImgAside__intro, .theme-light .p2, .theme-light .section-teamOnMain__intro, .theme-light .accordion-body, .theme-light .vacancy__section__cnt, .theme-light .article__author__cite, .theme-light .commonPage__intro, .theme-light .listWrap__title, .theme-light .cardCompanyStata .cardCommon__footer, .cardCompanyStata .theme-light .cardCommon__footer, .theme-light .cardBlog__intro, .theme-light .cardBlog__title, .theme-light .partners__list__item__inner, .theme-light .listSquare__item, .theme-light .p3, .theme-light .form-input__inner label, .form-input__inner .theme-light label, .theme-light .team__person__name, .theme-light .article__author__name, .theme-light .listWrap__item, .theme-light .pill, .theme-light .btn-black_small .btn-txt, .btn-black_small .theme-light .btn-txt, .theme-light .btn .q, .btn .theme-light .q {
   color: #131314;
 }
 
@@ -521,6 +523,9 @@ a {
 .tab-grouping[role=tablist] + .tab-content {
   margin-top: 30px;
 }
+.tab-content .hidden {
+  display: none;
+}
 
 .showMore__wrap {
   position: relative;
@@ -575,6 +580,18 @@ a {
   height: 0.06em;
   right: 0;
   top: calc(50% - 0.06em);
+}
+
+.square {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+}
+.square_white {
+  background-color: #fff;
+}
+.square_black {
+  background-color: #131314;
 }
 
 /* Header */
@@ -642,12 +659,12 @@ a {
 /* /Header */
 /* Footer layout */
 .footerMain > .container-fluid {
+  border-top: 1px solid #8C9095;
   background-color: #fff;
 }
 .footerMain .wrapperDefault-inner {
   padding-top: 30px;
   padding-bottom: 50px;
-  border-top: 1px solid #8C9095;
 }
 .footerMain a,
 .footerMain a:visited,
@@ -688,25 +705,29 @@ a {
   border-radius: 50%;
 }
 .planetoid__orbita-1 {
-  transform: translateY(-50%) rotate(20deg);
+  transform: translateY(-50%) rotate(0deg);
 }
 .planetoid__orbita-1 .planetoid__pill {
-  transform: rotate(-20deg);
+  transform: rotate(0deg);
 }
 .planetoid__orbita-1 svg {
-  transform: rotate(-17deg) translate(30px, -34px);
+  width: 100%;
+  height: 100%;
 }
 .planetoid__orbita-2 {
-  transform: translateY(-50%) rotate(-30deg);
+  transform: translateY(-50%) rotate(0deg);
 }
 .planetoid__orbita-2 .planetoid__pill {
-  transform: rotate(30deg);
+  transform: rotate(0deg);
 }
 .planetoid__orbita-2 svg {
-  transform: rotate(17deg) translate(55px, -32px);
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
 }
 .planetoid__pill {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(25px);
   border: 1px solid #fff;
   border-radius: 100px;
   color: #fff;
@@ -857,7 +878,7 @@ a {
   width: 100%;
   cursor: pointer;
 }
-.partners__list__item .p2, .partners__list__item .accordion-body, .partners__list__item .vacancy__section__cnt, .partners__list__item .article__author__cite, .partners__list__item .article__page p, .article__page .partners__list__item p, .partners__list__item .commonPage__intro, .partners__list__item .listWrap__title, .partners__list__item .cardCompanyStata .cardCommon__footer, .cardCompanyStata .partners__list__item .cardCommon__footer, .partners__list__item .cardBlog__intro, .partners__list__item .cardBlog__title, .partners__list__item .listSquare__item, .partners__list__item .partners__list__item__inner {
+.partners__list__item .p2, .partners__list__item .section-teamOnMain__intro, .partners__list__item .accordion-body, .partners__list__item .vacancy__section__cnt, .partners__list__item .article__author__cite, .partners__list__item .article__page p, .article__page .partners__list__item p, .partners__list__item .commonPage__intro, .partners__list__item .listWrap__title, .partners__list__item .cardCompanyStata .cardCommon__footer, .cardCompanyStata .partners__list__item .cardCommon__footer, .partners__list__item .cardBlog__intro, .partners__list__item .cardBlog__title, .partners__list__item .listSquare__item, .partners__list__item .partners__list__item__inner {
   margin-bottom: 0;
 }
 .partners__list__item:hover::after {
@@ -872,8 +893,9 @@ a {
 }
 
 .logos {
-  margin-top: 40px;
   margin-bottom: 85px;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .logos__line {
   /* display: flex;
@@ -1326,7 +1348,7 @@ a.cardCommon:hover [class$=__title] {
   margin-bottom: 100px;
 }
 .commonPage__section__title {
-  margin-bottom: 40px;
+  margin-bottom: 40px !important;
 }
 .commonPage__title {
   margin-bottom: 0 !important;
@@ -1472,33 +1494,428 @@ a.cardCommon:hover [class$=__title] {
   background-repeat: no-repeat;
   margin-left: 50px;
 }
-.team {
+.section-teamOnMain {
+  position: relative;
+}
+.section-teamOnMain__title {
+  position: absolute;
+  left: 0;
+  top: 300px;
+  z-index: 1;
+}
+.section-teamOnMain__title .btn {
+  margin-top: 15px;
+}
+.section-teamOnMain__intro {
+  margin-bottom: 0;
+  position: absolute;
+  left: 33%;
+  right: 40px;
+  top: 685px;
+  z-index: 1;
+}
+.section-teamOnMain .square {
+  bottom: 50px;
+  left: 0px;
+}
+.section-teamOnMain .plus {
+  top: 40%;
+  right: 10px;
+}
+
+.team__person:hover .team__person__imgWrap img {
+  filter: grayscale(0);
+}
+.team__person__imgWrap {
+  margin-bottom: 15px;
+}
+.team__person__imgWrap img {
+  width: 100%;
+  filter: grayscale(1);
+  transition: filter 0.5s;
+}
+.team__person__name {
+  margin-bottom: 5px;
+}
+.team__onAbout {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
   justify-content: space-between;
 }
-.team__item {
+.team__onAbout .team__person {
   width: calc((100% - 30px) / 2);
 }
-.team__item:nth-child(even) {
+.team__onAbout .team__person:nth-child(even) {
   margin-top: 60px;
 }
-.team__item:hover .team__item__imgWrap img {
+.team__onMain {
+  overflow: hidden;
+  position: relative;
+  height: 885px;
+}
+.team__onMain .team__person {
+  cursor: pointer;
+  margin: 0;
+  width: 70px;
+  text-align: center;
+  position: absolute;
+}
+.team__onMain .team__person:hover .team__person__imgWrap img {
   filter: grayscale(0);
 }
-.team__item__imgWrap {
-  margin-bottom: 15px;
+.team__onMain .team__person[data-start] {
+  filter: blur(21px);
+  transform: scale(0.5);
 }
-.team__item__imgWrap img {
+.team__onMain .team__person__imgWrap {
+  height: 70px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.team__onMain .team__person__imgWrap::after {
+  content: "";
+  left: 0;
+  top: 0;
   width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 0 68px rgba(255, 255, 255, 0.95);
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+.team__onMain .team__person_bigSize {
+  width: 140px;
+}
+.team__onMain .team__person_bigSize .team__person__imgWrap {
+  height: 140px;
+}
+.team__onMain .team__person_bigSize .team__person__imgWrap img {
+  filter: grayscale(0);
+}
+.team__onMain .team__person_bigSize .team__person__imgWrap::after {
+  display: none;
+}
+.team__onMain .team__person.blured {
+  filter: blur(21px);
+  transition: transform 1s 0s, filter 1s 0s;
+}
+.team__onMain .team__person.blured .team__person__imgWrap img {
   filter: grayscale(1);
-  transition: filter 0.5s;
 }
-.team__item__name {
-  margin-bottom: 5px;
+.team__onMain .team__person.blured .team__person__desc {
+  position: relative;
+  top: -100px;
 }
+.team__onMain .team__person.active {
+  filter: blur(0);
+  transform: scale(1) !important;
+  transition: transform 1s 0s, filter 1s 0s;
+}
+.team__onMain .team__person.active .team__person__imgWrap img {
+  filter: grayscale(0);
+}
+.team__onMain .team__person.active .team__person__imgWrap:after {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 0px rgba(255, 255, 255, 0);
+}
+.team__onMain .team__person.hovered {
+  filter: blur(0);
+  transform: scale(1) !important;
+  transition: transform 0.5s 0s, filter 0.6s 0s;
+}
+.team__onMain .team__person.hovered .team__person__imgWrap img {
+  filter: grayscale(0);
+}
+.team__onMain .team__person.hovered .team__person__imgWrap:after {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 0px rgba(255, 255, 255, 0);
+}
+.team__onMain .spot {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+.team__onMain .spot_1 {
+  filter: blur(20px);
+  width: 40px;
+  height: 40px;
+  left: 79px;
+  top: 587px;
+}
+.team__onMain .spot_2 {
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(10px);
+  width: 25px;
+  height: 25px;
+  right: 30px;
+  top: 413px;
+}
+.team__onMain .spot_3 {
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(10px);
+  width: 25px;
+  height: 25px;
+  left: 67px;
+  top: 33px;
+}
+.team__onMain .p1, .team__onMain .blTextImgAside__intro {
+  left: 32%;
+  top: 440px;
+}
+.team__onMain .p2, .team__onMain .listSquare__item, .team__onMain .partners__list__item__inner, .team__onMain .cardBlog__title, .team__onMain .cardBlog__intro, .team__onMain .cardCompanyStata .cardCommon__footer, .cardCompanyStata .team__onMain .cardCommon__footer, .team__onMain .listWrap__title, .team__onMain .commonPage__intro, .team__onMain .article__page p, .article__page .team__onMain p, .team__onMain .article__author__cite, .team__onMain .vacancy__section__cnt, .team__onMain .accordion-body, .team__onMain .section-teamOnMain__intro {
+  right: 0;
+  top: 117px;
+}
+.team__onMain .p3, .team__onMain .form-input__inner label, .form-input__inner .team__onMain label, .team__onMain .btn .q, .btn .team__onMain .q, .team__onMain .btn-black_small .btn-txt, .btn-black_small .team__onMain .btn-txt, .team__onMain .pill, .team__onMain .listWrap__item, .team__onMain .article__author__name, .team__onMain .team__person__name {
+  left: 10px;
+  top: 475px;
+}
+.team__onMain .p4 {
+  left: 15px;
+  top: 645px;
+}
+.team__onMain .p5 {
+  right: 5px;
+  top: 490px;
+}
+.team__onMain .p6 {
+  left: 30%;
+  top: 135px;
+}
+.team__onMain .p7 {
+  left: 0px;
+  top: 80px;
+}
+.team__onMain .p8 {
+  left: 157px;
+  top: 15px;
+}
+.team__onMain .p9 {
+  left: 80%;
+  top: 0;
+}
+.team__onMain .p10 {
+  display: none;
+  left: 980px;
+  top: 167px;
+}
+
+/* form */
+.form__picAside {
+  min-width: auto;
+  margin-left: 0;
+}
+.form-control, .form-control:focus {
+  background-color: transparent;
+}
+.form-input__inner {
+  position: relative;
+  margin-bottom: 10px;
+  min-height: 46px;
+  border-radius: 16px;
+  background-color: transparent;
+  z-index: 0;
+}
+.form-input__inner [type=text],
+.form-input__inner [type=email],
+.form-input__inner [type=password],
+.form-input__inner [type=tel],
+.form-input__inner textarea {
+  font-family: "Raleway";
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 22px 0 8px;
+  position: relative;
+  transition: ease all 0.3s;
+  z-index: 1;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #8C9095;
+  color: #8C9095;
+}
+.form-input__inner [type=text]:not(:placeholder-shown), .form-input__inner [type=text]:focus,
+.form-input__inner [type=email]:not(:placeholder-shown),
+.form-input__inner [type=email]:focus,
+.form-input__inner [type=password]:not(:placeholder-shown),
+.form-input__inner [type=password]:focus,
+.form-input__inner [type=tel]:not(:placeholder-shown),
+.form-input__inner [type=tel]:focus,
+.form-input__inner textarea:not(:placeholder-shown),
+.form-input__inner textarea:focus {
+  border-color: #131314;
+  color: #131314;
+  box-shadow: none;
+}
+.form-input__inner [type=text]:not(:placeholder-shown) ~ label, .form-input__inner [type=text]:focus ~ label,
+.form-input__inner [type=email]:not(:placeholder-shown) ~ label,
+.form-input__inner [type=email]:focus ~ label,
+.form-input__inner [type=password]:not(:placeholder-shown) ~ label,
+.form-input__inner [type=password]:focus ~ label,
+.form-input__inner [type=tel]:not(:placeholder-shown) ~ label,
+.form-input__inner [type=tel]:focus ~ label,
+.form-input__inner textarea:not(:placeholder-shown) ~ label,
+.form-input__inner textarea:focus ~ label {
+  color: #131314;
+  font-size: 12px;
+  top: 8px;
+}
+.form-input__inner [type=text]:not(:placeholder-shown)::placeholder, .form-input__inner [type=text]:focus::placeholder,
+.form-input__inner [type=email]:not(:placeholder-shown)::placeholder,
+.form-input__inner [type=email]:focus::placeholder,
+.form-input__inner [type=password]:not(:placeholder-shown)::placeholder,
+.form-input__inner [type=password]:focus::placeholder,
+.form-input__inner [type=tel]:not(:placeholder-shown)::placeholder,
+.form-input__inner [type=tel]:focus::placeholder,
+.form-input__inner textarea:not(:placeholder-shown)::placeholder,
+.form-input__inner textarea:focus::placeholder {
+  color: #131314;
+}
+.form-input__inner [type=text][disabled],
+.form-input__inner [type=email][disabled],
+.form-input__inner [type=password][disabled],
+.form-input__inner [type=tel][disabled],
+.form-input__inner textarea[disabled] {
+  pointer-events: none;
+}
+.form-input__inner textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 53px;
+  resize: vertical;
+  padding-top: 20px;
+}
+.form-input__inner label {
+  display: none;
+  font-family: "Raleway";
+  color: #8C9095;
+  line-height: 1;
+  left: 21px;
+  position: absolute;
+  top: 19px;
+  margin: 0;
+  transition: ease all 0.2s;
+  z-index: 1;
+  width: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.form-input__attach input[type=file] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+.form-input__attach label {
+  display: block;
+  top: 24px;
+  left: 0;
+}
+.form-input__attach .form-input__inner {
+  min-height: 55px;
+  background-image: url(../i/attach.svg);
+  background-position: 100% 31px;
+  background-repeat: no-repeat;
+}
+.form-input__attach .form-input__inner::after {
+  height: 1px;
+  background-color: #8C9095;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+}
+.form-radio, .form-check {
+  margin: 0;
+  padding: 0;
+}
+.form-radio__inner, .form-check__inner {
+  display: inline-flex;
+  position: relative;
+  vertical-align: top;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+}
+.form-radio__inner > input[type=radio], .form-radio__inner > input[type=checkbox], .form-check__inner > input[type=radio], .form-check__inner > input[type=checkbox] {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+.form-radio__inner.checked .form-check-box, .form-radio__inner.checked .form-radio-box, .form-radio__inner > input:checked ~ .form-check-box, .form-radio__inner > input:checked ~ .form-radio-box, .form-check__inner.checked .form-check-box, .form-check__inner.checked .form-radio-box, .form-check__inner > input:checked ~ .form-check-box, .form-check__inner > input:checked ~ .form-radio-box {
+  border-color: transparent;
+  transition: border-color 0.5s 0s;
+}
+.form-radio__inner.checked .form-check-box::after, .form-radio__inner.checked .form-radio-box::after, .form-radio__inner > input:checked ~ .form-check-box::after, .form-radio__inner > input:checked ~ .form-radio-box::after, .form-check__inner.checked .form-check-box::after, .form-check__inner.checked .form-radio-box::after, .form-check__inner > input:checked ~ .form-check-box::after, .form-check__inner > input:checked ~ .form-radio-box::after {
+  opacity: 1;
+  transition: opacity 0.3s 0s;
+}
+.form-radio__inner.checked:hover .form-check-box::after, .form-radio__inner.checked:hover .form-radio-box::after, .form-radio__inner > input:checked:hover ~ .form-check-box::after, .form-radio__inner > input:checked:hover ~ .form-radio-box::after, .form-check__inner.checked:hover .form-check-box::after, .form-check__inner.checked:hover .form-radio-box::after, .form-check__inner > input:checked:hover ~ .form-check-box::after, .form-check__inner > input:checked:hover ~ .form-radio-box::after {
+  opacity: 0.8;
+}
+.form-radio-txt, .form-check-txt {
+  line-height: 1.2;
+}
+.form-check-box, .form-radio-box {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  background-color: transparent;
+  margin-right: 7px;
+  border: 1px solid #131314;
+  margin-top: 0;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  position: relative;
+  transition: border-color 0.5s 0s;
+}
+.form-check-box::after, .form-radio-box::after {
+  content: "";
+  opacity: 0;
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 0.5s 0s;
+}
+.form-check-box {
+  border-radius: 0;
+}
+.form-check-box::after {
+  background-image: url(../i/check.png);
+}
+.form-radio-box {
+  border-radius: 50%;
+}
+.form-radio-box::after {
+  background-image: url(../i/radio.png);
+}
+
+/* /form */
 /* Media Queries */
+@media (max-width: 575.98px) {
+  form {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
 @media (max-width: 767.98px) {
   .btn-grouping {
     display: flex;
@@ -1580,14 +1997,115 @@ a.cardCommon:hover [class$=__title] {
     margin-left: auto;
     text-align: right;
   }
-  .team__item {
+  .team__onAbout .team__person {
     width: calc((100% - 60px) / 3);
   }
-  .team__item:nth-child(n+4):nth-child(-n+6):nth-child(even) {
+  .team__onAbout .team__person:nth-child(n+4):nth-child(-n+6):nth-child(even) {
     margin-top: 0;
   }
-  .team__item:nth-child(n+4):nth-child(-n+6):nth-child(odd) {
+  .team__onAbout .team__person:nth-child(n+4):nth-child(-n+6):nth-child(odd) {
     margin-top: 60px;
+  }
+  .section-teamOnMain__title {
+    top: 340px;
+  }
+  .section-teamOnMain__intro {
+    left: 33%;
+    right: 40px;
+    top: 810px;
+  }
+  .section-teamOnMain .square {
+    bottom: auto;
+    top: 712px;
+    left: 0px;
+  }
+  .section-teamOnMain .plus {
+    top: 33%;
+    right: 10px;
+  }
+  .team__onMain {
+    height: 950px;
+  }
+  .team__onMain .team__person {
+    width: 95px;
+  }
+  .team__onMain .team__person__imgWrap {
+    height: 95px;
+  }
+  .team__onMain .team__person_bigSize {
+    width: 180px;
+  }
+  .team__onMain .team__person_bigSize .team__person__imgWrap {
+    height: 180px;
+  }
+  .team__onMain .spot_1 {
+    filter: blur(20px);
+    width: 40px;
+    height: 40px;
+    left: 79px;
+    top: 700px;
+  }
+  .team__onMain .spot_2 {
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    right: 30px;
+    top: 413px;
+  }
+  .team__onMain .spot_3 {
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    left: 67px;
+    top: 33px;
+  }
+  .team__onMain .p1, .team__onMain .blTextImgAside__intro {
+    left: 32%;
+    top: 480px;
+  }
+  .team__onMain .p2, .team__onMain .listSquare__item, .team__onMain .partners__list__item__inner, .team__onMain .cardBlog__title, .team__onMain .cardBlog__intro, .team__onMain .cardCompanyStata .cardCommon__footer, .cardCompanyStata .team__onMain .cardCommon__footer, .team__onMain .listWrap__title, .team__onMain .commonPage__intro, .team__onMain .article__page p, .article__page .team__onMain p, .team__onMain .article__author__cite, .team__onMain .vacancy__section__cnt, .team__onMain .accordion-body, .team__onMain .section-teamOnMain__intro {
+    right: 65px;
+    top: 190px;
+  }
+  .team__onMain .p3, .team__onMain .btn .q, .btn .team__onMain .q, .team__onMain .btn-black_small .btn-txt, .btn-black_small .team__onMain .btn-txt, .team__onMain .pill, .team__onMain .listWrap__item, .team__onMain .article__author__name, .team__onMain .team__person__name, .team__onMain .form-input__inner label, .form-input__inner .team__onMain label {
+    left: 10px;
+    top: 518px;
+  }
+  .team__onMain .p4 {
+    left: 36px;
+    top: 810px;
+  }
+  .team__onMain .p5 {
+    right: 20px;
+    top: 550px;
+  }
+  .team__onMain .p6 {
+    left: 30%;
+    top: 135px;
+  }
+  .team__onMain .p7 {
+    left: 0px;
+    top: 145px;
+  }
+  .team__onMain .p8 {
+    left: 215px;
+    top: 15px;
+  }
+  .team__onMain .p9 {
+    left: 70%;
+    top: 0;
+  }
+  .team__onMain .p10 {
+    display: none;
+    left: 980px;
+    top: 167px;
+  }
+  .form__picAside {
+    display: block;
+    min-width: 600px;
+    margin-left: -320px;
   }
 }
 @media (min-width: 768px) {
@@ -1602,7 +2120,7 @@ a.cardCommon:hover [class$=__title] {
   h3, .h3, .vacancy__section__title {
     font-size: 30px;
   }
-  h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button {
+  h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button, .section-teamOnMain__title {
     font-size: 24px;
   }
   h5, .h5 {
@@ -1880,6 +2398,108 @@ a.cardCommon:hover [class$=__title] {
   .blTextImgAside__intro {
     max-width: none;
   }
+  .form__picAside {
+    min-width: 120%;
+    margin-left: -50px;
+  }
+  .section-teamOnMain__title {
+    top: 340px;
+  }
+  .section-teamOnMain__intro {
+    left: 50%;
+    right: 40px;
+    top: 530px;
+  }
+  .section-teamOnMain .square {
+    bottom: auto;
+    top: 712px;
+    left: 0px;
+  }
+  .section-teamOnMain .plus {
+    top: 32%;
+    right: 10px;
+  }
+  .team__onMain {
+    height: 850px;
+  }
+  .team__onMain .team__person {
+    width: 90px;
+  }
+  .team__onMain .team__person__imgWrap {
+    height: 90px;
+  }
+  .team__onMain .team__person_bigSize {
+    width: 150px;
+  }
+  .team__onMain .team__person_bigSize .team__person__imgWrap {
+    height: 150px;
+  }
+  .team__onMain .spot_1 {
+    filter: blur(20px);
+    width: 40px;
+    height: 40px;
+    left: 79px;
+    top: 650px;
+  }
+  .team__onMain .spot_2 {
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    right: 27%;
+    top: 690px;
+  }
+  .team__onMain .spot_3 {
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    left: 80%;
+    top: 33px;
+  }
+  .team__onMain .p1, .team__onMain .blTextImgAside__intro {
+    left: 22%;
+    top: 480px;
+  }
+  .team__onMain .p2, .team__onMain .listSquare__item, .team__onMain .partners__list__item__inner, .team__onMain .cardBlog__title, .team__onMain .cardBlog__intro, .team__onMain .cardCompanyStata .cardCommon__footer, .cardCompanyStata .team__onMain .cardCommon__footer, .team__onMain .listWrap__title, .team__onMain .commonPage__intro, .team__onMain .article__page p, .article__page .team__onMain p, .team__onMain .article__author__cite, .team__onMain .vacancy__section__cnt, .team__onMain .accordion-body, .team__onMain .section-teamOnMain__intro {
+    right: auto;
+    left: 38%;
+    top: 165px;
+  }
+  .team__onMain .p3, .team__onMain .btn .q, .btn .team__onMain .q, .team__onMain .btn-black_small .btn-txt, .btn-black_small .team__onMain .btn-txt, .team__onMain .pill, .team__onMain .listWrap__item, .team__onMain .article__author__name, .team__onMain .team__person__name, .team__onMain .form-input__inner label, .form-input__inner .team__onMain label {
+    left: 10px;
+    top: 518px;
+  }
+  .team__onMain .p4 {
+    left: 21%;
+    top: 715px;
+  }
+  .team__onMain .p5 {
+    right: auto;
+    left: 44%;
+    top: 680px;
+  }
+  .team__onMain .p6 {
+    left: 62%;
+    top: 135px;
+  }
+  .team__onMain .p7 {
+    left: 75%;
+    top: 300px;
+  }
+  .team__onMain .p8 {
+    left: 54%;
+    top: 15px;
+  }
+  .team__onMain .p9 {
+    left: 84%;
+    top: 145px;
+  }
+  .team__onMain .p10 {
+    display: none;
+    left: 980px;
+    top: 167px;
+  }
 }
 @media (min-width: 992px) {
   .pill {
@@ -1903,6 +2523,10 @@ a.cardCommon:hover [class$=__title] {
     width: 32px;
     height: 32px;
   }
+  .square {
+    width: 20px;
+    height: 20px;
+  }
   .listSquare__item {
     margin-bottom: 20px;
   }
@@ -1918,7 +2542,7 @@ a.cardCommon:hover [class$=__title] {
   h3, .h3, .vacancy__section__title {
     font-size: 36px;
   }
-  h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button {
+  h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button, .section-teamOnMain__title {
     font-size: 26px;
   }
   h5, .h5 {
@@ -1929,14 +2553,14 @@ a.cardCommon:hover [class$=__title] {
     margin-bottom: 20px;
     font-weight: 500;
   }
-  p, .p2, .listSquare__item, .partners__list__item__inner, .cardBlog__title, .cardBlog__intro, .cardCompanyStata .cardCommon__footer, .listWrap__title, .commonPage__intro, .article__page p, .article__author__cite, .vacancy__section__cnt, .accordion-body {
+  p, .p2, .listSquare__item, .partners__list__item__inner, .cardBlog__title, .cardBlog__intro, .cardCompanyStata .cardCommon__footer, .listWrap__title, .commonPage__intro, .article__page p, .article__author__cite, .vacancy__section__cnt, .accordion-body, .section-teamOnMain__intro {
     font-size: 18px;
   }
-  .p3, .form-input__inner label, .btn .q, .btn-black_small .btn-txt, .pill, .listWrap__item, .article__author__name, .team__item__name {
+  .p3, .btn .q, .btn-black_small .btn-txt, .pill, .listWrap__item, .article__author__name, .team__person__name, .form-input__inner label {
     font-size: 16px;
     line-height: 1.3;
   }
-  .t1, .pill-small, .cardCommon__footer, .cardBlog__footer, .cardCalendar__footer, .article__author__position, .blTextImgAside__footer, .accordion-button .brief, .team__item__position {
+  .t1, .pill-small, .cardCommon__footer, .cardBlog__footer, .cardCalendar__footer, .article__author__position, .blTextImgAside__footer, .accordion-button .brief, .team__person__position {
     font-size: 14px;
   }
   .commonPage__wrapper {
@@ -1949,7 +2573,7 @@ a.cardCommon:hover [class$=__title] {
     margin-bottom: 150px;
   }
   .commonPage__section__title {
-    margin-bottom: 60px;
+    margin-bottom: 60px !important;
   }
   .commonPage__subTitle {
     margin-top: 60px;
@@ -2184,20 +2808,123 @@ a.cardCommon:hover [class$=__title] {
     padding-top: 30px;
     padding-bottom: 30px;
   }
-  .team {
+  .team__onAbout {
     width: 79%;
   }
-  .team__item {
+  .team__onAbout .team__person {
     width: calc((100% - 120px) / 5);
   }
-  .team__item:nth-child(-n+5):nth-child(even) {
+  .team__onAbout .team__person:nth-child(-n+5):nth-child(even) {
     margin-top: 100px !important;
   }
-  .team__item:nth-child(n+6):nth-child(odd) {
+  .team__onAbout .team__person:nth-child(n+6):nth-child(odd) {
     margin-top: 100px;
   }
-  .team__item:nth-child(n+6):nth-child(even) {
+  .team__onAbout .team__person:nth-child(n+6):nth-child(even) {
     margin-top: 0;
+  }
+  .section-teamOnMain__title {
+    top: 340px;
+  }
+  .section-teamOnMain__intro {
+    left: 58%;
+    right: 15px;
+    top: 530px;
+  }
+  .section-teamOnMain .square {
+    bottom: auto;
+    top: 712px;
+    left: 0px;
+  }
+  .section-teamOnMain .plus {
+    top: 32%;
+    right: 10px;
+  }
+  .team__onMain {
+    height: 880px;
+  }
+  .team__onMain .team__person {
+    width: 120px;
+  }
+  .team__onMain .team__person__imgWrap {
+    height: 120px;
+  }
+  .team__onMain .team__person_bigSize {
+    width: 195px;
+  }
+  .team__onMain .team__person_bigSize .team__person__imgWrap {
+    height: 195px;
+  }
+  .team__onMain .spot_1 {
+    filter: blur(20px);
+    width: 40px;
+    height: 40px;
+    left: 79px;
+    top: 680px;
+  }
+  .team__onMain .spot_2 {
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    right: 27%;
+    top: 690px;
+  }
+  .team__onMain .spot_3 {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    left: 80%;
+    top: 33px;
+  }
+  .team__onMain .p1, .team__onMain .blTextImgAside__intro {
+    left: 22%;
+    top: 480px;
+  }
+  .team__onMain .p2, .team__onMain .listSquare__item, .team__onMain .partners__list__item__inner, .team__onMain .cardBlog__title, .team__onMain .cardBlog__intro, .team__onMain .cardCompanyStata .cardCommon__footer, .cardCompanyStata .team__onMain .cardCommon__footer, .team__onMain .listWrap__title, .team__onMain .commonPage__intro, .team__onMain .article__page p, .article__page .team__onMain p, .team__onMain .article__author__cite, .team__onMain .vacancy__section__cnt, .team__onMain .accordion-body, .team__onMain .section-teamOnMain__intro {
+    right: auto;
+    left: 33%;
+    top: 165px;
+  }
+  .team__onMain .p3, .team__onMain .btn .q, .btn .team__onMain .q, .team__onMain .btn-black_small .btn-txt, .btn-black_small .team__onMain .btn-txt, .team__onMain .pill, .team__onMain .listWrap__item, .team__onMain .article__author__name, .team__onMain .team__person__name, .team__onMain .form-input__inner label, .form-input__inner .team__onMain label {
+    left: 10px;
+    top: 518px;
+  }
+  .team__onMain .p4 {
+    left: 21%;
+    top: 715px;
+  }
+  .team__onMain .p5 {
+    right: auto;
+    left: 44%;
+    top: 680px;
+  }
+  .team__onMain .p6 {
+    left: 60%;
+    top: 150px;
+  }
+  .team__onMain .p7 {
+    left: 70%;
+    top: 300px;
+  }
+  .team__onMain .p8 {
+    left: 54%;
+    top: 15px;
+  }
+  .team__onMain .p9 {
+    left: 84%;
+    top: 145px;
+  }
+  .team__onMain .p10 {
+    display: block;
+    left: 73%;
+    top: 33px;
+  }
+  .form__picAside {
+    min-width: auto;
+    margin-left: 0;
   }
 }
 @media (min-width: 1200px) {
@@ -2213,7 +2940,7 @@ a.cardCommon:hover [class$=__title] {
   h3, .h3, .vacancy__section__title {
     font-size: 40px;
   }
-  h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button {
+  h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button, .section-teamOnMain__title {
     font-size: 32px;
   }
   h5, .h5 {
@@ -2222,13 +2949,13 @@ a.cardCommon:hover [class$=__title] {
   .p1, .blTextImgAside__intro {
     font-size: 20px;
   }
-  p, .p2, .listSquare__item, .partners__list__item__inner, .cardBlog__title, .cardBlog__intro, .cardCompanyStata .cardCommon__footer, .listWrap__title, .commonPage__intro, .article__page p, .article__author__cite, .vacancy__section__cnt, .accordion-body {
+  p, .p2, .listSquare__item, .partners__list__item__inner, .cardBlog__title, .cardBlog__intro, .cardCompanyStata .cardCommon__footer, .listWrap__title, .commonPage__intro, .article__page p, .article__author__cite, .vacancy__section__cnt, .accordion-body, .section-teamOnMain__intro {
     font-size: 20px;
   }
-  .p3, .form-input__inner label, .btn .q, .btn-black_small .btn-txt, .pill, .listWrap__item, .article__author__name, .team__item__name {
+  .p3, .btn .q, .btn-black_small .btn-txt, .pill, .listWrap__item, .article__author__name, .team__person__name, .form-input__inner label {
     font-size: 16px;
   }
-  .t1, .pill-small, .cardCommon__footer, .cardBlog__footer, .cardCalendar__footer, .article__author__position, .blTextImgAside__footer, .accordion-button .brief, .team__item__position {
+  .t1, .pill-small, .cardCommon__footer, .cardBlog__footer, .cardCalendar__footer, .article__author__position, .blTextImgAside__footer, .accordion-button .brief, .team__person__position {
     font-size: 14px;
   }
   .pill {
@@ -2248,7 +2975,7 @@ a.cardCommon:hover [class$=__title] {
     padding-bottom: 50px;
   }
   .commonPage__section__title {
-    margin-bottom: 70px;
+    margin-bottom: 70px !important;
   }
   .commonPage__subTitle {
     margin-top: 70px;
@@ -2388,209 +3115,106 @@ a.cardCommon:hover [class$=__title] {
   .accordion-body {
     max-width: 50%;
   }
+  .section-teamOnMain__title {
+    top: 340px;
+  }
+  .section-teamOnMain__intro {
+    left: 50%;
+    right: 15px;
+    top: 530px;
+  }
+  .section-teamOnMain .square {
+    bottom: auto;
+    top: 815px;
+    left: 0px;
+  }
+  .section-teamOnMain .plus {
+    top: 32%;
+    right: 10px;
+  }
+  .team__onMain {
+    height: 880px;
+  }
+  .team__onMain .team__person {
+    width: 120px;
+  }
+  .team__onMain .team__person__imgWrap {
+    height: 120px;
+  }
+  .team__onMain .team__person_bigSize {
+    width: 195px;
+  }
+  .team__onMain .team__person_bigSize .team__person__imgWrap {
+    height: 195px;
+  }
+  .team__onMain .spot_1 {
+    filter: blur(20px);
+    width: 40px;
+    height: 40px;
+    left: 79px;
+    top: 680px;
+  }
+  .team__onMain .spot_2 {
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    right: 27%;
+    top: 690px;
+  }
+  .team__onMain .spot_3 {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    left: 80%;
+    top: 33px;
+  }
+  .team__onMain .p1, .team__onMain .blTextImgAside__intro {
+    left: 25%;
+    top: 450px;
+  }
+  .team__onMain .p2, .team__onMain .listSquare__item, .team__onMain .partners__list__item__inner, .team__onMain .cardBlog__title, .team__onMain .cardBlog__intro, .team__onMain .cardCompanyStata .cardCommon__footer, .cardCompanyStata .team__onMain .cardCommon__footer, .team__onMain .listWrap__title, .team__onMain .commonPage__intro, .team__onMain .article__page p, .article__page .team__onMain p, .team__onMain .article__author__cite, .team__onMain .vacancy__section__cnt, .team__onMain .accordion-body, .team__onMain .section-teamOnMain__intro {
+    right: auto;
+    left: 33%;
+    top: 165px;
+  }
+  .team__onMain .p3, .team__onMain .btn .q, .btn .team__onMain .q, .team__onMain .btn-black_small .btn-txt, .btn-black_small .team__onMain .btn-txt, .team__onMain .pill, .team__onMain .listWrap__item, .team__onMain .article__author__name, .team__onMain .team__person__name, .team__onMain .form-input__inner label, .form-input__inner .team__onMain label {
+    left: 90px;
+    top: 518px;
+  }
+  .team__onMain .p4 {
+    left: 21%;
+    top: 665px;
+  }
+  .team__onMain .p5 {
+    right: auto;
+    left: 44%;
+    top: 620px;
+  }
+  .team__onMain .p6 {
+    left: 60%;
+    top: 180px;
+  }
+  .team__onMain .p7 {
+    left: 70%;
+    top: 300px;
+  }
+  .team__onMain .p8 {
+    left: 49%;
+    top: 80px;
+  }
+  .team__onMain .p9 {
+    left: 84%;
+    top: 145px;
+  }
+  .team__onMain .p10 {
+    left: 73%;
+    top: 33px;
+  }
 }
 /* /Media Queries */
-/* form */
-.form-control, .form-control:focus {
-  background-color: transparent;
-}
-.form-input__inner {
-  position: relative;
-  margin-bottom: 10px;
-  min-height: 46px;
-  border-radius: 16px;
-  background-color: transparent;
-  z-index: 0;
-}
-.form-input__inner [type=text],
-.form-input__inner [type=email],
-.form-input__inner [type=password],
-.form-input__inner [type=tel],
-.form-input__inner textarea {
-  font-family: "Raleway";
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 22px 0 8px;
-  position: relative;
-  transition: ease all 0.3s;
-  z-index: 1;
-  border-radius: 0;
-  border: none;
-  border-bottom: 1px solid #8C9095;
-  color: #8C9095;
-}
-.form-input__inner [type=text]:not(:placeholder-shown), .form-input__inner [type=text]:focus,
-.form-input__inner [type=email]:not(:placeholder-shown),
-.form-input__inner [type=email]:focus,
-.form-input__inner [type=password]:not(:placeholder-shown),
-.form-input__inner [type=password]:focus,
-.form-input__inner [type=tel]:not(:placeholder-shown),
-.form-input__inner [type=tel]:focus,
-.form-input__inner textarea:not(:placeholder-shown),
-.form-input__inner textarea:focus {
-  border-color: #131314;
-  color: #131314;
-  box-shadow: none;
-}
-.form-input__inner [type=text]:not(:placeholder-shown) ~ label, .form-input__inner [type=text]:focus ~ label,
-.form-input__inner [type=email]:not(:placeholder-shown) ~ label,
-.form-input__inner [type=email]:focus ~ label,
-.form-input__inner [type=password]:not(:placeholder-shown) ~ label,
-.form-input__inner [type=password]:focus ~ label,
-.form-input__inner [type=tel]:not(:placeholder-shown) ~ label,
-.form-input__inner [type=tel]:focus ~ label,
-.form-input__inner textarea:not(:placeholder-shown) ~ label,
-.form-input__inner textarea:focus ~ label {
-  color: #131314;
-  font-size: 12px;
-  top: 8px;
-}
-.form-input__inner [type=text]:not(:placeholder-shown)::placeholder, .form-input__inner [type=text]:focus::placeholder,
-.form-input__inner [type=email]:not(:placeholder-shown)::placeholder,
-.form-input__inner [type=email]:focus::placeholder,
-.form-input__inner [type=password]:not(:placeholder-shown)::placeholder,
-.form-input__inner [type=password]:focus::placeholder,
-.form-input__inner [type=tel]:not(:placeholder-shown)::placeholder,
-.form-input__inner [type=tel]:focus::placeholder,
-.form-input__inner textarea:not(:placeholder-shown)::placeholder,
-.form-input__inner textarea:focus::placeholder {
-  color: #131314;
-}
-.form-input__inner [type=text][disabled],
-.form-input__inner [type=email][disabled],
-.form-input__inner [type=password][disabled],
-.form-input__inner [type=tel][disabled],
-.form-input__inner textarea[disabled] {
-  pointer-events: none;
-}
-.form-input__inner textarea {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  height: 53px;
-  resize: vertical;
-  padding-top: 20px;
-}
-.form-input__inner label {
-  display: none;
-  font-family: "Raleway";
-  color: #8C9095;
-  line-height: 1;
-  left: 21px;
-  position: absolute;
-  top: 19px;
-  margin: 0;
-  transition: ease all 0.2s;
-  z-index: 1;
-  width: 0;
-  white-space: nowrap;
-  pointer-events: none;
-}
-.form-input__attach input[type=file] {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-}
-.form-input__attach label {
-  display: block;
-  top: 24px;
-  left: 0;
-}
-.form-input__attach .form-input__inner {
-  min-height: 55px;
-  background-image: url(../i/attach.svg);
-  background-position: 100% 31px;
-  background-repeat: no-repeat;
-}
-.form-input__attach .form-input__inner::after {
-  height: 1px;
-  background-color: #8C9095;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  content: "";
-}
-.form-radio, .form-check {
-  margin: 0;
-  padding: 0;
-}
-.form-radio__inner, .form-check__inner {
-  display: inline-flex;
-  position: relative;
-  vertical-align: top;
-  align-items: center;
-  cursor: pointer;
-}
-.form-radio__inner > input[type=radio], .form-radio__inner > input[type=checkbox], .form-check__inner > input[type=radio], .form-check__inner > input[type=checkbox] {
-  cursor: pointer;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 1;
-}
-.form-radio__inner.checked .form-check-box, .form-radio__inner.checked .form-radio-box, .form-radio__inner > input:checked ~ .form-check-box, .form-radio__inner > input:checked ~ .form-radio-box, .form-check__inner.checked .form-check-box, .form-check__inner.checked .form-radio-box, .form-check__inner > input:checked ~ .form-check-box, .form-check__inner > input:checked ~ .form-radio-box {
-  border-color: transparent;
-  transition: border-color 0.5s 0s;
-}
-.form-radio__inner.checked .form-check-box::after, .form-radio__inner.checked .form-radio-box::after, .form-radio__inner > input:checked ~ .form-check-box::after, .form-radio__inner > input:checked ~ .form-radio-box::after, .form-check__inner.checked .form-check-box::after, .form-check__inner.checked .form-radio-box::after, .form-check__inner > input:checked ~ .form-check-box::after, .form-check__inner > input:checked ~ .form-radio-box::after {
-  opacity: 1;
-  transition: opacity 0.3s 0s;
-}
-.form-radio__inner.checked:hover .form-check-box::after, .form-radio__inner.checked:hover .form-radio-box::after, .form-radio__inner > input:checked:hover ~ .form-check-box::after, .form-radio__inner > input:checked:hover ~ .form-radio-box::after, .form-check__inner.checked:hover .form-check-box::after, .form-check__inner.checked:hover .form-radio-box::after, .form-check__inner > input:checked:hover ~ .form-check-box::after, .form-check__inner > input:checked:hover ~ .form-radio-box::after {
-  opacity: 0.8;
-}
-.form-radio-txt, .form-check-txt {
-  line-height: 1.2;
-}
-.form-check-box, .form-radio-box {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  background-color: transparent;
-  margin-right: 7px;
-  border: 1px solid #131314;
-  margin-top: 0;
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  position: relative;
-  transition: border-color 0.5s 0s;
-}
-.form-check-box::after, .form-radio-box::after {
-  content: "";
-  opacity: 0;
-  position: absolute;
-  z-index: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: opacity 0.5s 0s;
-}
-.form-check-box {
-  border-radius: 0;
-}
-.form-check-box::after {
-  background-image: url(../i/check.png);
-}
-.form-radio-box {
-  border-radius: 50%;
-}
-.form-radio-box::after {
-  background-image: url(../i/radio.png);
-}
-
-/* /form */
 /* animations */
 [data-aos^=fade],
 [data-aos^=fade][data-aos^=fade] {
