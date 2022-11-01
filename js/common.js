@@ -6,6 +6,7 @@ window.addEventListener("load", WindowLoad, false);
 function DomLoaded() {
 	initSlick.check();
 	tabListFilter.onload();
+	textLoader();
 }
 function WindowLoad() {
 	var partnersList;
@@ -24,6 +25,7 @@ function WindowLoad() {
 	logosRunningLines();
 	orbitaPills();
 	teamOnMain();
+	bubbles.init();
 }
 function eventDocClick(e) {
     var targ = e.target;
@@ -60,6 +62,20 @@ function eventDocClick(e) {
     			break;
     		}
     		break;
+    	}
+    	if(targ.classList.contains("bubbles__item")) {
+    		if(targ.querySelector(".bubbles__item__inner")) {    			
+	    		bubbles.click(targ);
+    		}
+    		break;
+    	}
+    	if(targ.classList.contains("cards-slickWrapper-firstLoad")) {
+    		if((clickedEl.classList.contains("slick-arrow-inner") && clickedEl.parentNode.classList.contains("slick-next"))
+    			||
+    			clickedEl.classList.contains("slick-next")
+    			) {
+    			targ.classList.remove("cards-slickWrapper-firstLoad");
+    		}
     	}
         targ = targ.parentNode;
     }
@@ -158,7 +174,7 @@ var tabListFilter = {
 			}
 		}
 	}
-}	
+};
 var initSlick = {
 	check: function() {
 		var isCardsSlick = document.getElementsByClassName("cards-slick")[0] ? 1 : 0;
@@ -195,6 +211,10 @@ var initSlick = {
 			}
 			else if(slickWrapper.classList.contains("cardCalendar-slickWrapper")) {
 				initCardCalendarSlickWrapper(slickWrapper.clientHeight);
+			}
+
+			if(slickWrapper.classList.contains("cards-slickWrapperForAnimate")) {
+				slickWrapper.classList.add("cards-slickWrapper-firstLoad");
 			}
 		});
 		$(".cards-slick").slick(initSlick.cardsSlickParams_1);
@@ -291,9 +311,170 @@ var initSlick = {
 	    ]
 	}	
 };
+var bubbles = {
+	currAnimation1: undefined,
+	currAnimation2: undefined,
+	init: function() {
+		var bubblesWrapper;
+		if(bubblesWrapper = document.querySelector(".bubbles")) {
+
+			ScrollTrigger.create({
+				trigger: bubblesWrapper,
+				start: "top 90%",
+				end: "bottom 50px",
+				onToggle: self => {
+					if(self.isActive) {						
+						action();
+					}
+					else {
+						floating.kill();
+					}
+				},
+			});
+
+			var floating;
+			function action() {
+
+				var timeAction = gsap.utils.random(2, 5);
+
+				floating = gsap.timeline({onComplete:action});
+
+				floating.to(bubblesWrapper.querySelectorAll(".bubbles__item"), {
+					x: "random(-20, 20)",
+					y: "random(-20, 20)",
+					rotation: "random(-10, 10)",
+					transformOrigin:'50% 50%',
+					duration: timeAction, 
+					ease:"none",
+					repeat:1, 
+					repeatRefresh: true
+				})
+			}
+
+			bubblesWrapper.addEventListener("mousemove", function(e) {
+				gsap.to(bubblesWrapper.querySelectorAll(".bubbles__item"), 
+					{
+						duration:3, 
+						x:function(i){return (e.clientX/window.innerWidth)/(i+1)*150}, 
+						y:function(i){return i*-20*(e.clientY/window.innerHeight)}, 
+						rotation: "random(-10, 10)",
+						overwrite:'auto'
+					});
+			});
+		}
+	},
+	click: function(bubble) {
+		this.closeOldBubble(bubble);
+		bubble.classList.toggle("active");
+		if(this.currAnimation1 || this.currAnimation2) {
+			this.currAnimation1.kill();
+			this.currAnimation2.kill();
+		}
+		if(bubble.classList.contains("active")) {
+			this.currAnimation1 = gsap.to(bubble.querySelector(".bubbles__item__title"), {
+				ease: "power4.out",
+				duration: 1,
+				scale: 1.2,
+				opacity: 0
+			})
+			this.currAnimation2 = gsap.fromTo(bubble.querySelectorAll(".bubbles__item__smallBuble"), 
+				{
+					opacity: 0,
+					scale: 0.9
+				},			
+				{
+					delay: 0.5,
+					ease: "elastic.out(1, 0.3)",
+					duration: 1,
+					opacity: 1,
+					scale: 1,
+					stagger: 0.1
+				}
+			)
+		}
+		else {
+			this.currAnimation1 = gsap.to(bubble.querySelectorAll(".bubbles__item__smallBuble"), 
+				{
+					duration: 0.2,
+					opacity: 0,
+					scale: 0.8,
+					stagger: 0.1
+				}
+			)
+			this.currAnimation2 = gsap.to(bubble.querySelector(".bubbles__item__title"), {
+				delay: 0.2,
+				ease: "power4.out",
+				duration: 1,
+				scale: 1,
+				opacity: 1
+			})
+		}
+	},
+	closeOldBubble: function(newBubble) {
+		var bubblesWrapper = newBubble.parentNode;
+		if(bubblesWrapper.querySelector(".active")) {
+			var allBubbles = bubblesWrapper.querySelectorAll(".bubbles__item");
+			allBubbles.forEach((bubble) => {
+				if(bubble.classList.contains("active")
+					&&
+					(bubble.classList[1] != newBubble.classList[1])
+				) 
+				{
+					bubble.classList.remove("active");
+					gsap.to(bubble.querySelectorAll(".bubbles__item__smallBuble"), 
+						{
+							duration: 0.2,
+							opacity: 0,
+							scale: 0.8,
+							stagger: 0.05
+						}
+					)
+					gsap.to(bubble.querySelector(".bubbles__item__title"), {
+						delay: 0.2,
+						ease: "power4.out",
+						duration: 0.5,
+						scale: 1,
+						opacity: 1
+					})
+				}
+			});
+		}
+	}
+}
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
+function textLoader() {
+	let targets = gsap.utils.toArray(".textPreloader .h1");
+	let dur = 0.65;
+	let hold = 2;
+
+	targets.forEach((obj, i) => {
+	  let tl = gsap.timeline({
+	    // delay: dur * i + hold * i,
+	    delay: dur * i + hold * i,
+	    repeat: 0,
+	    repeatDelay: (targets.length - 1) * (dur + hold) - dur,
+	    defaults: {
+	      ease: "none",
+	      duration: dur
+	    }
+	  });
+		gsap.set(obj, 
+			{
+				yPercent: 130, 
+				scale:0.7, 
+				opacity:0,
+				onComplete: () => {gsap.set(".textPreloader", {opacity:1});}
+		});
+	
+	  // tl.from(obj, {yPercent: 100, y: 30, opacity: 1 });
+	  // tl.to(obj, {opacity: 1, delay:2});
+	  tl.to(obj, {scale:1, opacity: 1}, "+=" + hold);
+	  tl.to(obj, {yPercent: 0}, "+=" + hold);
+	  tl.to(obj, {yPercent: -130, opacity: 0}, "+=" + hold);
+	});
+}
 function initCardBlogSlickWrapper(hBlocg) {
 	const first = gsap.timeline({});
 	first.set(".cardBlog-slickWrapper .cards-slick", {
@@ -318,22 +499,17 @@ function initCardBlogSlickWrapper(hBlocg) {
 			    		cardBlogSlickWrapper.classList.remove("waitToAnimate");
 			    		cardBlogSlickWrapper.classList.add("animationDone");
 			    	}, 1000);
-			    	// console.log("onEnter: ", progerss, direction, isActive);
 			    },
 			    onEnterBack: ({progerss, direction, isActive}) => {
 			    	// document.querySelector(".cardBlog-slickWrapperForAnimate").classList.remove("waitToAnimate");
-			    	// console.log("onEnterBack: ", progerss, direction, isActive);
 			    },
 			    onLeave: ({progerss, direction, isActive}) => {
 			    	// document.querySelector(".cardBlog-slickWrapperForAnimate").classList.add("waitToAnimate");
-			    	// console.log("onLeave: ", progerss, direction, isActive);
 			    },
 			    onLeaveBack: ({progerss, direction, isActive}) => {
-			    	cardBlogSlickWrapper.classList.add("waitToAnimate");
-			    	cardBlogSlickWrapper.classList.remove("animationDone");
-			    	// console.log("onLeaveBack: ", progerss, direction, isActive);
+			    	// cardBlogSlickWrapper.classList.add("waitToAnimate");
+			    	// cardBlogSlickWrapper.classList.remove("animationDone");
 			    }
-			    // onUpdate: ({progerss, direction, isActive}) => console.log("onUpdate: ", progerss, direction, isActive)
 			}
 		})
 	};
@@ -363,7 +539,6 @@ function initCardCalendarSlickWrapper(hCalendar) {
 			    		calendarBlogSlickWrapper.classList.remove("waitToAnimate");
 			    		calendarBlogSlickWrapper.classList.add("animationDone");
 			    	}, 1000);
-			    	// console.log("onEnter: ", progerss, direction, isActive);
 			    },
 			    onEnterBack: ({progerss, direction, isActive}) => {
 			    	// document.querySelector(".cardCalendar-slickWrapperForAnimate").classList.remove("waitToAnimate");
@@ -374,11 +549,10 @@ function initCardCalendarSlickWrapper(hCalendar) {
 			    	// console.log("onLeave: ", progerss, direction, isActive);
 			    },
 			    onLeaveBack: ({progerss, direction, isActive}) => {
-			    	calendarBlogSlickWrapper.classList.add("waitToAnimate");
-			    	calendarBlogSlickWrapper.classList.remove("animationDone");
+			    	// calendarBlogSlickWrapper.classList.add("waitToAnimate");
+			    	// calendarBlogSlickWrapper.classList.remove("animationDone");
 			    	// console.log("onLeaveBack: ", progerss, direction, isActive);
 			    }
-			    // onUpdate: ({progerss, direction, isActive}) => console.log("onUpdate: ", progerss, direction, isActive)
 			}
 		})
 	}
@@ -593,7 +767,7 @@ function teamOnMain() {
 				isFirstShow = true,
 				isPersonHovered = false,
 				rotateIntervalId = 0,
-				checkDateIntervalId = 0,
+				checkTimeIntervalId = 0,
 				activePositionsArr = [],
 				activePersonsArr = [],
 				antiLooping = 0;
@@ -605,15 +779,13 @@ function teamOnMain() {
 				end: "bottom 50px",
 				onToggle: self => {
 					if(self.isActive) {						
-						console.log("toggled, isActive:", self.isActive);
 						antiLooping = 0;
 						teamRotation();
-						checkDatePersons();
+						checkTimePersons();
 					}
 					else {
-						console.log("toggled, isActive:", self.isActive);
 						antiLooping = 31;
-						clearInterval(checkDateIntervalId);
+						clearInterval(checkTimeIntervalId);
 						clearTimeout(rotateIntervalId);
 					}
 				},
@@ -636,8 +808,6 @@ function teamOnMain() {
 			});
 		}
 	}
-
-
 
 	function teamRotation(delay) {
 		var _delay = delay ? delay : 500;
@@ -729,7 +899,7 @@ function teamOnMain() {
 	};
 	function hoverPerson(person) {
 		isPersonHovered = true;
-		clearInterval(checkDateIntervalId);
+		clearInterval(checkTimeIntervalId);
 		clearTimeout(rotateIntervalId);
 		rndImgNumber = getRand(3,personsQ);
 		blurAll(person);
@@ -740,7 +910,7 @@ function teamOnMain() {
 		antiLooping = 0;
 		person.classList.remove("hovered");
 		teamRotation(250);
-		checkDatePersons();
+		checkTimePersons();
 	};
 	function blurAll(personHovered) {
 		var personsForBlur = teamWrapper.querySelectorAll(".team__person:not(.team__person_bigSize):not([data-person='" + personHovered.getAttribute("data-person") + "'])");
@@ -752,8 +922,8 @@ function teamOnMain() {
 			person.setAttribute("data-depth", 0.3);		
 		});
 	};
-	function checkDatePersons() {		
-		checkDateIntervalId = setInterval(function() {
+	function checkTimePersons() {		
+		checkTimeIntervalId = setInterval(function() {
 			cleanOldTimePersons();		
 		}, 700);
 	}
@@ -766,7 +936,6 @@ function teamOnMain() {
 
 			if(start) {				
 				elapsed = (Date.now() - start) / 1000;
-				console.log("elapsed: ", elapsed);
 				if(elapsed > 8) {
 					person.classList.add("blured");
 					person.classList.remove("hovered");
