@@ -595,6 +595,9 @@ a {
 }
 
 /* Header */
+.headerMain {
+  min-height: 55px;
+}
 .headerMain-inner {
   position: relative;
   display: flex;
@@ -605,6 +608,12 @@ a {
   padding: 0 15px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
+}
+.headerMain-inner.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 1200px;
 }
 .headerMain__menu__bar {
   cursor: pointer;
@@ -912,14 +921,14 @@ a {
 }
 .logos__line[data-direction="1"] {
   margin-left: 0;
-  transition: margin-left 3s;
+  transition: margin-left 3s linear;
 }
 .logos__line[data-direction="-1"] {
   margin-left: 0;
-  transition: margin-left 3s;
+  transition: margin-left 3s linear;
 }
 .logos__line__item {
-  left: -205px;
+  left: -185px;
   position: absolute;
   height: 65px;
   width: 205px;
@@ -945,7 +954,7 @@ a {
 }
 .logos__line__2[data-direction="-1"] .logos__line__item {
   left: auto;
-  right: -205px;
+  right: -185px;
 }
 .logos:not(.active) .logos__line[data-direction="1"] {
   margin-left: -100vw;
@@ -1230,12 +1239,12 @@ a {
   width: 230px;
   min-width: 230px;
 }
-.cards-slick .slick-track {
-  border-left: 1px solid #131314;
-}
 .cards-slick .slick-track .slick-slide {
   border: 1px solid #131314;
   border-left: none;
+}
+.cards-slick .slick-track .slick-slide:first-child {
+  border-left: 1px solid #131314;
 }
 
 .gallery-slick .slick-list {
@@ -1568,6 +1577,7 @@ a.cardCommon:hover [class$=__title] {
 }
 
 .vacancy__page__header, .vacancy__section {
+  background-color: #F0F4F9;
   margin-bottom: 0 !important;
   margin-top: 20px;
   padding-bottom: 20px;
@@ -1578,14 +1588,22 @@ a.cardCommon:hover [class$=__title] {
   right: 0;
   bottom: 25px;
 }
+.vacancy__page__header__footer, .vacancy__section__footer {
+  background-color: #F0F4F9;
+}
+.vacancy__page__header__footer.active, .vacancy__section__footer.active {
+  box-shadow: 0 -19px 15px -16px rgba(0, 0, 0, 0.2);
+}
 .vacancy__section__inner {
-  max-width: calc(100% - 40px);
+  max-height: 100%;
+  overflow: auto;
 }
 .vacancy__section__title {
   margin-bottom: 15px;
 }
 .vacancy__section__cnt {
   margin-bottom: 0 !important;
+  max-width: calc(100% - 40px);
 }
 /* /vacansiece */
 .blTextImgAside {
@@ -1850,6 +1868,10 @@ a.cardCommon:hover [class$=__title] {
   top: 167px;
 }
 
+.section__paralax {
+  position: relative;
+}
+
 /* form */
 .form__picAside {
   min-width: auto;
@@ -2065,8 +2087,31 @@ a.cardCommon:hover [class$=__title] {
     text-align: center;
     margin-bottom: 40px;
   }
+  .ecosistemCells__footer .btn-grouping {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
 }
 @media (max-width: 767.98px) {
+  .page-index .cards-slick {
+    border-left: none !important;
+  }
+  .page-index .cards-slick .cardBlog,
+.page-index .cards-slick .cardCommon {
+    border: 1px solid #fff;
+    border-left: none;
+  }
+  .page-index .cards-slick > div:first-child .cardBlog, .page-index .cards-slick > div:first-child .cardCommon {
+    border-left: 1px solid #fff;
+  }
+  .cards-slick .cardBlog,
+.cards-slick .cardCommon {
+    border: 1px solid #131314;
+    border-left: none;
+  }
+  .cards-slick > div:first-child .cardBlog, .cards-slick > div:first-child .cardCommon {
+    border-left: 1px solid #131314;
+  }
   .btn-grouping {
     display: flex;
     overflow: auto;
@@ -2105,7 +2150,7 @@ a.cardCommon:hover [class$=__title] {
 .textPreloader {
   opacity: 0;
   left: 0;
-  top: -5px;
+  top: 1px;
   text-align: center;
   position: absolute;
   width: 100%;
@@ -3176,6 +3221,9 @@ a.cardCommon:hover [class$=__title] {
     min-width: auto;
     margin-left: 0;
   }
+  .textPreloader {
+    top: -1px;
+  }
 }
 @media (min-width: 1200px) {
   .body-inner {
@@ -3472,6 +3520,9 @@ a.cardCommon:hover [class$=__title] {
   .team__onMain .p10 {
     left: 73%;
     top: 33px;
+  }
+  .textPreloader {
+    top: -5px;
   }
 }
 /* /Media Queries */
