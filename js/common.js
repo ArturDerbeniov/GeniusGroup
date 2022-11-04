@@ -342,8 +342,8 @@ var bubbles = {
 				floating = gsap.timeline({onComplete:action});
 
 				floating.to(bubblesWrapper.querySelectorAll(".bubbles__item"), {
-					x: "random(-20, 20)",
-					y: "random(-20, 20)",
+					x: "random(-15, 15)",
+					y: "random(-15, 15)",
 					rotation: "random(-10, 10)",
 					transformOrigin:'50% 50%',
 					duration: timeAction, 
