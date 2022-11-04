@@ -1038,6 +1038,7 @@ function sectionParalax() {
 		let headerMainInner = document.querySelector(".headerMain-inner");
 
 		headerMainInner.classList.add("fixed");
+		headerMainInner.classList.add("shown");
 
 		gsap.utils.toArray(sections).forEach((section, i) => {
 
@@ -1058,10 +1059,12 @@ function sectionParalax() {
 							if(i >= sections.length-1) {
 								vacancyFooter.classList.add("active");
 								headerMainInner.classList.remove("fixed");
+								headerMainInner.classList.remove("shown");
 							}
 							else {
 								vacancyFooter.classList.remove("active");
 								headerMainInner.classList.add("fixed");
+								headerMainInner.classList.add("shown");
 							}
 						}
 					},
@@ -1083,15 +1086,16 @@ function sectionParalax() {
 				opacity: 0,
 				onStart: () => {
 					headerMainInner.classList.add("fixed");
+					headerMainInner.classList.add("shown");
 					if(i >= sections.length-1) {
 						vacancyFooter.classList.add("active");
 						headerMainInner.classList.remove("fixed");
+						headerMainInner.classList.remove("shown");
 					}
 				},
 				onComplete: () => {
 					if(i >= sections.length-1) {
 						vacancyFooter.classList.remove("active");
-						headerMainInner.classList.add("fixed");
 					}
 				}
 			})
