@@ -597,6 +597,8 @@ a {
 /* Header */
 .headerMain {
   min-height: 55px;
+  position: relative;
+  z-index: 1;
 }
 .headerMain-inner {
   position: relative;
@@ -614,6 +616,10 @@ a {
   top: 0;
   width: 100%;
   max-width: 1200px;
+  margin-top: -70px;
+}
+.headerMain-inner.shown {
+  margin-top: 0;
 }
 .headerMain__menu__bar {
   cursor: pointer;
