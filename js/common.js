@@ -1208,7 +1208,7 @@ var bgs = {
 				activeBgs;
 			function liveBg() {
 
-				var timeAction = gsap.utils.random(1, 3);
+				var timeAction = gsap.utils.random(3, 10);
 				var rndHue = gsap.utils.random(-30, 30, 1);
 				var rndContrast = gsap.utils.random(0.5, 1.5, 0.1);
 				var rndBgSizeX = gsap.utils.random(65, 115, 1);
