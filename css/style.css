@@ -3710,8 +3710,8 @@ a.cardCommon:hover [class$=__title] {
     margin-top: -300px;
   }
   .bgs__bg.band {
-    background-size: 100% auto;
-    background-position: 0px 100%;
+    background-size: 100% auto !important;
+    background-position: 0px 100% !important;
   }
 }
 /* /Media Queries */
