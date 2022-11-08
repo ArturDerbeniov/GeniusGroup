@@ -1259,6 +1259,8 @@ a {
 .gallery-slickWrapper,
 .cards-slickWrapper {
   margin-top: 40px;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .cards-slickWrapperForAnimate {
@@ -1325,8 +1327,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc((100vw - 30px) / 3);
-  min-width: calc((100vw - 30px) / 3);
+  width: calc((100vw - 0px) / 3);
+  min-width: calc((100vw - 0px) / 3);
   transform: scale(1);
   filter: grayscale(1) brightness(0.5);
   transition: filter 0.5s, transform 0.5s;
@@ -3645,6 +3647,11 @@ body.textPreloader-active .textPreloader-container {
   .gallery-slickWrapper,
 .cards-slickWrapper {
     margin-top: 70px;
+    margin-left: 0;
+  }
+  .gallery-slickWrapper.animationDone,
+.cards-slickWrapper.animationDone {
+    margin-left: -15px;
   }
   .cards-slickWrapper-firstLoad {
     padding-left: calc((100vw - 1230px) / 2);
