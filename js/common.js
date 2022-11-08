@@ -565,7 +565,7 @@ var bgs = {
 					ease:"none",
 					repeat:0, 
 					repeatRefresh: true
-				}, "<2")
+				})
 				.to(activeBgs, {
 					backgroundSize: (index, element) => {
 						if(window.innerWidth >= 992) {							
@@ -574,7 +574,7 @@ var bgs = {
 							}
 						}
 					},
-					duration:5
+					duration:7
 				})				
 			}
 		}
@@ -679,7 +679,7 @@ function textPreLoader() {
 	if(!textPreloaderContainer) return;
 
 	let isAllowedShowTextLoader = false;
-	
+
 	if(!getCookie("textPreLoader")) {
 		setCookie("textPreLoader","1",1);
 		isAllowedShowTextLoader = true;
