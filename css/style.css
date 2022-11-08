@@ -6,7 +6,8 @@
 .page-index.body-inner {
   color: #fff;
   background-color: #131314;
-  background-image: url(../i/bg_body_1.png);
+  background-image: url(../i/header_bg.png);
+  background-size: 100% auto;
 }
 .page-index .logoGenius {
   filter: brightness(100);
@@ -2496,6 +2497,9 @@ body.textPreloader-active .textPreloader-container {
   }
 }
 @media (min-width: 768px) {
+  .page-index.body-inner {
+    background-position: 0 -10vh;
+  }
   h1, .h1, .commonPage__title {
     font-size: 46px;
     margin-bottom: 30px;
@@ -3445,9 +3449,6 @@ body.textPreloader-active .textPreloader-container {
   }
 }
 @media (min-width: 1200px) {
-  .body-inner {
-    background-size: 1230px auto;
-  }
   h1, .h1, .commonPage__title {
     font-size: 64px;
   }
