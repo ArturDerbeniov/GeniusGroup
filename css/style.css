@@ -95,7 +95,7 @@
 .page-index .plus::before, .page-index .plus::after {
   background-color: #fff;
 }
-.listWrap__list, .partners__list, .listSquare, .resetList {
+.popup__menu ul, .listWrap__list, .partners__list, .listSquare, .resetList {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -120,6 +120,10 @@ body {
   font-weight: 400;
   position: relative;
 }
+body.popup-menu-active {
+  overflow: hidden;
+}
+
 .bgBody {
   position: absolute;
   z-index: -1;
@@ -193,8 +197,8 @@ body {
 
 /* /layout */
 h1, .h1, .commonPage__title,
-h2, .h2, .textPreloader .h1, .textPreloader .commonPage__title, .vacancy__page__header__title, .vacancies__page__header__title, .commonPage__section__title:not(h4), .cardCompanyStata .cardCommon__title,
-h3, .h3 h4, .vacancy__section__title h4,
+h2, .h2, .textPreloader .motto, .vacancy__page__header__title, .vacancies__page__header__title, .commonPage__section__title:not(h4), .cardCompanyStata .cardCommon__title,
+h3, .h3 h4, .popup__menu ul li h4, .vacancy__section__title h4,
 .h4 h5,
 .section-teamOnMain__title h5,
 .accordion-button h5,
@@ -213,12 +217,12 @@ h1, .h1, .commonPage__title {
   margin-bottom: 30px;
 }
 
-h2, .h2, .textPreloader .h1, .textPreloader .commonPage__title, .vacancy__page__header__title, .vacancies__page__header__title, .commonPage__section__title:not(h4), .cardCompanyStata .cardCommon__title {
+h2, .h2, .textPreloader .motto, .vacancy__page__header__title, .vacancies__page__header__title, .commonPage__section__title:not(h4), .cardCompanyStata .cardCommon__title {
   font-size: 34px;
   margin-bottom: 25px;
 }
 
-h3, .h3, .vacancy__section__title {
+h3, .h3, .popup__menu ul li, .vacancy__section__title {
   font-size: 28px;
   margin-bottom: 20px;
 }
@@ -301,8 +305,8 @@ a {
   background-color: #fff;
 }
 .theme-light h1, .theme-light .h1, .theme-light .commonPage__title,
-.theme-light h2, .theme-light .h2, .theme-light .vacancy__page__header__title, .theme-light .vacancies__page__header__title, .theme-light .commonPage__section__title:not(h4),
-.theme-light h3, .theme-light .h3, .theme-light .vacancy__section__title,
+.theme-light h2, .theme-light .h2, .theme-light .textPreloader .motto, .textPreloader .theme-light .motto, .theme-light .vacancy__page__header__title, .theme-light .vacancies__page__header__title, .theme-light .commonPage__section__title:not(h4),
+.theme-light h3, .theme-light .h3, .theme-light .popup__menu ul li, .popup__menu ul .theme-light li, .theme-light .vacancy__section__title,
 .theme-light h4, .theme-light .h4, .theme-light .section-teamOnMain__title, .theme-light .accordion-button, .theme-light .blTextImgAside__title, .theme-light .cardCalendar__title, .theme-light .cardCommon__title,
 .theme-light h5, .theme-light .h5,
 .theme-light p, .theme-light .p1, .theme-light .blTextImgAside__intro, .theme-light .p2, .theme-light .section-teamOnMain__intro, .theme-light .accordion-body, .theme-light .vacancy__section__cnt, .theme-light .article__author__cite, .theme-light .commonPage__intro, .theme-light .listWrap__title, .theme-light .cardCompanyStata .cardCommon__footer, .cardCompanyStata .theme-light .cardCommon__footer, .theme-light .cardBlog__intro, .theme-light .cardBlog__title, .theme-light .bubbles__item, .theme-light .partners__list__item__inner, .theme-light .listSquare__item, .theme-light .p3, .theme-light .form-input__inner label, .form-input__inner .theme-light label, .theme-light .team__person__name, .theme-light .article__author__name, .theme-light .listWrap__item, .theme-light .pill, .theme-light .btn-black_small .btn-txt, .btn-black_small .theme-light .btn-txt, .theme-light .btn .q, .btn .theme-light .q {
@@ -1987,6 +1991,14 @@ a.cardCommon:hover [class$=__title] {
   width: 1114px;
 }
 
+body.textPreloader-active {
+  overflow: hidden;
+}
+body.textPreloader-active .textPreloader-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .textPreloader {
   opacity: 0;
   left: 0;
@@ -1996,12 +2008,47 @@ a.cardCommon:hover [class$=__title] {
   width: 100%;
   z-index: -1;
 }
-.textPreloader .h1, .textPreloader .commonPage__title {
+.textPreloader .motto {
   margin: 0 0 0px !important;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  top: 55px;
+  bottom: 0;
+  opacity: 0;
+  background: rgba(19, 19, 20, 0.08);
+  backdrop-filter: blur(40px);
+  transition: opacity 1s;
+}
+.popup_active {
+  display: block;
+}
+.popup_show {
+  opacity: 1;
+}
+
+.popup__menu {
+  color: #fff;
+}
+.popup__menu a {
+  color: #fff !important;
+}
+.popup__menu .popup__inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup__menu__menuList li {
+  opacity: 0;
 }
 
 /* form */
@@ -2453,11 +2500,11 @@ a.cardCommon:hover [class$=__title] {
     font-size: 46px;
     margin-bottom: 30px;
   }
-  h2, .h2, .cardCompanyStata .cardCommon__title, .commonPage__section__title:not(h4), .vacancies__page__header__title, .vacancy__page__header__title, .textPreloader .h1, .textPreloader .commonPage__title {
+  h2, .h2, .cardCompanyStata .cardCommon__title, .commonPage__section__title:not(h4), .vacancies__page__header__title, .vacancy__page__header__title, .textPreloader .motto {
     font-size: 34px;
     margin-bottom: 25px;
   }
-  h3, .h3, .vacancy__section__title {
+  h3, .h3, .vacancy__section__title, .popup__menu ul li {
     font-size: 30px;
   }
   h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button, .section-teamOnMain__title {
@@ -2973,10 +3020,10 @@ a.cardCommon:hover [class$=__title] {
   h1, .h1, .commonPage__title {
     font-size: 58px;
   }
-  h2, .h2, .cardCompanyStata .cardCommon__title, .commonPage__section__title:not(h4), .vacancies__page__header__title, .vacancy__page__header__title, .textPreloader .h1, .textPreloader .commonPage__title {
+  h2, .h2, .cardCompanyStata .cardCommon__title, .commonPage__section__title:not(h4), .vacancies__page__header__title, .vacancy__page__header__title, .textPreloader .motto {
     font-size: 40px;
   }
-  h3, .h3, .vacancy__section__title {
+  h3, .h3, .vacancy__section__title, .popup__menu ul li {
     font-size: 36px;
   }
   h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button, .section-teamOnMain__title {
@@ -3404,10 +3451,10 @@ a.cardCommon:hover [class$=__title] {
   h1, .h1, .commonPage__title {
     font-size: 64px;
   }
-  h2, .h2, .cardCompanyStata .cardCommon__title, .commonPage__section__title:not(h4), .vacancies__page__header__title, .vacancy__page__header__title, .textPreloader .h1, .textPreloader .commonPage__title {
+  h2, .h2, .cardCompanyStata .cardCommon__title, .commonPage__section__title:not(h4), .vacancies__page__header__title, .vacancy__page__header__title, .textPreloader .motto {
     font-size: 48px;
   }
-  h3, .h3, .vacancy__section__title {
+  h3, .h3, .vacancy__section__title, .popup__menu ul li {
     font-size: 40px;
   }
   h4, .h4, .cardCommon__title, .cardCalendar__title, .blTextImgAside__title, .accordion-button, .section-teamOnMain__title {
