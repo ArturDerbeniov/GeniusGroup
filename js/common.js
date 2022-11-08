@@ -13,7 +13,10 @@ function eventDomLoaded() {
 	tabListFilter.onload();
 }
 function eventWindowLoad() {
-	var partnersList;
+	var partnersList,
+		headerMain = document.querySelector(".headerMain");
+		vpH = window.innerHeight;
+
 	if(partnersList = document.querySelector(".partners__list")) {
 		var partnersListItems = partnersList.querySelectorAll(".partners__list__item");
 		partnersListItems.forEach((item) => {
@@ -29,6 +32,28 @@ function eventWindowLoad() {
 	if(getCookie("textPreLoader")) {		
 		launchAllAnimations();
 	}
+	else {
+		if(!document.querySelector(".textPreloader-container")) {
+			launchAllAnimations();
+		}
+	}
+
+	ScrollTrigger.create({
+		trigger: document.body,
+		start: "top center",
+		onUpdate: (self) => {
+			if(self.direction == -1) {
+				headerMain.classList.add("show");
+				headerMain.classList.remove("hide");				
+			}
+			else {
+				if((window.scrollY > vpH/2)) {					
+					headerMain.classList.remove("show");				
+					headerMain.classList.add("hide");				
+				}
+			}
+		}
+	});
 }
 function eventWindowResize() {	
 	bgs.setPosition();
@@ -99,7 +124,6 @@ function launchAllAnimations() {
 		trigger: trigger,
 		start: "top 50px",
 		end: "bottom 50px",
-		markers:  {visible: true, label: "myTrigger"},
 		onToggle: self => {
 			if(self.isActive) {
 				console.log(self.isActive);
