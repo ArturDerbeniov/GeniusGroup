@@ -681,7 +681,7 @@ function textPreLoader() {
 	let isAllowedShowTextLoader = false;
 	
 	if(!getCookie("textPreLoader")) {
-		setCookie("textPreLoader","1",0.01);
+		setCookie("textPreLoader","1",1);
 		isAllowedShowTextLoader = true;
 	}
 
