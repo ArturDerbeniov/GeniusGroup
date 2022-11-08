@@ -26,7 +26,9 @@ function eventWindowLoad() {
 		});
 	}
 
-	launchAllAnimations();
+	if(getCookie("textPreLoader")) {		
+		launchAllAnimations();
+	}
 }
 function eventWindowResize() {	
 	bgs.setPosition();
@@ -89,7 +91,26 @@ function launchAllAnimations() {
 	bubbles.init();
 	plusSpin();
 	sectionParalax();
-	bgs.setPosition();	
+	bgs.setPosition();
+
+	let headerMain = document.querySelector(".headerMain");
+	let trigger =  document.querySelector(".contentMain.theme-light");
+	ScrollTrigger.create({
+		trigger: trigger,
+		start: "top 50px",
+		end: "bottom 50px",
+		markers:  {visible: true, label: "myTrigger"},
+		onToggle: self => {
+			if(self.isActive) {
+				console.log(self.isActive);
+				headerMain.classList.add("blackOnWhite");
+			}
+			else {				
+				console.log(self.isActive);
+				headerMain.classList.remove("blackOnWhite");
+			}
+		}
+	});	
 }
 var fnDelay = function () {
     var timer = 0;
