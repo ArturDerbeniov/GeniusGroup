@@ -695,6 +695,12 @@ a {
   top: auto;
   transform: rotate(45deg);
 }
+.headerMain.blackOnWhite .headerMain__logo img {
+  filter: contrast(2);
+}
+.headerMain.blackOnWhite .headerMain__menu__bar__inner::before, .headerMain.blackOnWhite .headerMain__menu__bar__inner::after {
+  background-color: #131314;
+}
 
 /* /Header */
 /* Footer layout */
