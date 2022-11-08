@@ -93,6 +93,13 @@
 .page-index .cardCalendar__cntWrap {
   transition: background-color 0.3s, color 0.1s 0.1s;
 }
+.page-index .popup__menu {
+  color: #fff;
+}
+.page-index .popup__menu a,
+.page-index .popup__menu a:visited {
+  color: #fff;
+}
 .page-index .plus::before, .page-index .plus::after {
   background-color: #fff;
 }
@@ -143,6 +150,7 @@ body.popup-menu-active {
 
 /* layout */
 .body-inner {
+  padding-top: 55px;
   color: #131314;
   background-color: #F0F4F9;
   background-repeat: no-repeat;
@@ -617,9 +625,17 @@ a {
   right: 0;
   min-height: 55px;
   z-index: 1;
+  transform: translateY(0);
+  transition: transform 0.3s linear;
 }
 .headerMain .wrapperDefault-inner {
   max-width: none;
+}
+.headerMain.show {
+  transform: translateY(0);
+}
+.headerMain.hide {
+  transform: translateY(-100%);
 }
 .headerMain-inner {
   position: relative;
@@ -631,16 +647,16 @@ a {
   padding: 0 15px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
-}
-.headerMain-inner.fixed {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: -70px;
-}
-.headerMain-inner.shown {
-  margin-top: 0;
+  /* &.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: -70px;
+  }
+  &.shown {
+    margin-top: 0;
+  } */
 }
 .headerMain__menu__bar {
   cursor: pointer;
@@ -2048,10 +2064,11 @@ body.textPreloader-active .textPreloader-container {
 }
 
 .popup__menu {
-  color: #fff;
+  color: #131314;
 }
-.popup__menu a {
-  color: #fff !important;
+.popup__menu a,
+.popup__menu a:visited {
+  color: #131314;
 }
 .popup__menu .popup__inner {
   width: 100%;
