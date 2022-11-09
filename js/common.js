@@ -8,8 +8,7 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 window.onbeforeunload = function(){window.scrollTo({top:0,left:0,behavior: "instant"});}
 
 function eventDomLoaded() {
-	textPreLoader();
-	initSlick.check();
+	textPreLoader();	
 	tabListFilter.onload();
 }
 function eventWindowLoad() {
@@ -29,8 +28,13 @@ function eventWindowLoad() {
 		});
 	}
 
-	if(getCookie("textPreLoader")) {		
-		launchAllAnimations();
+	if(document.querySelector(".page-index")) {
+		if(getCookie("textPreLoader")) {		
+			launchAllAnimations();
+		}
+		else {
+			bgs.setPosition();
+		}
 	}
 	else {
 		if(!document.querySelector(".textPreloader-container")) {
@@ -117,6 +121,7 @@ function launchAllAnimations() {
 	plusSpin();
 	sectionParalax();
 	bgs.setPosition();
+	initSlick.check();
 
 	let headerMain = document.querySelector(".headerMain");
 	let trigger =  document.querySelector(".contentMain.theme-light");
@@ -126,11 +131,9 @@ function launchAllAnimations() {
 		end: "bottom 50px",
 		onToggle: self => {
 			if(self.isActive) {
-				console.log(self.isActive);
 				headerMain.classList.add("blackOnWhite");
 			}
 			else {				
-				console.log(self.isActive);
 				headerMain.classList.remove("blackOnWhite");
 			}
 		}
@@ -563,6 +566,8 @@ var bubbles = {
 	}
 }
 var bgs = {
+	excludeToReColor: ["header_bg"],
+	excludeToReSize: ["header_bg", "band"],
 	setBg: function(bgEl) {
 		let bgsEls = document.querySelectorAll(".bgs__bg");
 		if(bgEl) {
@@ -572,11 +577,17 @@ var bgs = {
 				end: "bottom -50%",
 				onToggle: self => {
 					if(self.isActive) {
-						let img;
+						let img,
+							that = window.bgs;
+
 						if(img = self.trigger.querySelector(".imgToBg")) {
 							imgTobg(img);
 						}
-						self.trigger.classList.add("active");
+
+						if(!that.checkException(self.trigger.classList, that.excludeToReColor)) {
+							self.trigger.classList.add("active");
+						}
+
 						activeBgs = document.querySelectorAll(".bgs__bg.active");
 						if(window.innerWidth >= 992) {
 							gsap.set(activeBgs,{filter:"hue-rotate(" + 1 +"deg) contrast(" + 1 + ")", backgroundSize:"100% 700px"});
@@ -613,8 +624,10 @@ var bgs = {
 				})
 				.to(activeBgs, {
 					backgroundSize: (index, element) => {
+						let self = window.bgs;
 						if(window.innerWidth >= 992) {							
-							if(!element.classList.contains("band")) {
+							// if(!element.classList.contains("band")) {
+							if(!self.checkException(element.classList, self.excludeToReSize)) {
 								return rndBgSizeX + "% " + (element.clientHeight-200) + "px"
 							}
 						}
@@ -628,7 +641,7 @@ var bgs = {
 		let bgs = document.querySelectorAll(".bgs__bg");
 
 		if(document.querySelector(".imgToBg-done")) {
-			this.cleanup();
+			window.bgs.cleanup();
 		}
 		if(bgs.length) {
 			bgs.forEach((bgEl, i) => {				
@@ -655,6 +668,15 @@ var bgs = {
 				item.classList.remove("imgToBg-done");
 			});
 		}
+	},
+	checkException: function(verificationArr, referenceArr) {
+		let isException = false;
+		verificationArr.forEach((cls) => {
+			if(referenceArr.includes(cls)) {
+				isException = true;
+			}
+		});
+		return isException;
 	}
 }
 var popup = {
