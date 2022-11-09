@@ -475,16 +475,18 @@ var bubbles = {
 				})
 			}
 
-			bubblesWrapper.addEventListener("mousemove", function(e) {
-				gsap.to(bubblesWrapper.querySelectorAll(".bubbles__item"), 
-					{
-						duration:3, 
-						x:function(i){return (e.clientX/window.innerWidth)/(i+1)*150}, 
-						y:function(i){return i*-20*(e.clientY/window.innerHeight)}, 
-						rotation: "random(-10, 10)",
-						overwrite:'auto'
-					});
-			});
+			if(window.innerWidth >= 992) {				
+				bubblesWrapper.addEventListener("mousemove", function(e) {				
+					gsap.to(bubblesWrapper.querySelectorAll(".bubbles__item"), 
+						{
+							duration:3, 
+							x:function(i){return (e.clientX/window.innerWidth)/(i+1)*150}, 
+							y:function(i){return i*-20*(e.clientY/window.innerHeight)}, 
+							rotation: "random(-10, 10)",
+							overwrite:'auto'
+						});
+				});
+			}
 		}
 	},
 	click: function(bubble) {
@@ -760,6 +762,7 @@ function textPreLoader() {
 		headerToTopInVH = 15,
 		distansHeaderToTop,		
 		headerMain = document.querySelector(".headerMain");
+		headerMainH = headerMain.clientHeight;
 
 	let resetScroll = (h) => {
 		let i = h || 0;
@@ -810,7 +813,11 @@ function textPreLoader() {
 			});			
 
 			tl.to(obj, {scale:1, opacity: 1}, "+=" + hold);
-			tl.to(obj, {"top": distansHeaderToTop+3}, "+=" + hold);
+			tl.to(obj, {
+				"top": () => {
+					return (distansHeaderToTop + ((headerMainH - obj.clientHeight) / 2))
+				}
+			}, "+=" + hold);
 			tl.to(obj, {scale: 1.15, opacity: 0}, "+=" + hold);	  
 		});
 
